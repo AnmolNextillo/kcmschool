@@ -27,4 +27,5 @@ class AppDelegate: RCTAppDelegate {
     Bundle.main.url(forResource: "main", withExtension: "jsbundle")
 #endif
   }
+  
 }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "46360016606",
+    "project_id": "kcmschool-42161",
+    "storage_bucket": "kcmschool-42161.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:46360016606:android:05656a0c53d0207210744f",
+        "android_client_info": {
+          "package_name": "com.kcmschool"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBt1pl9xR7QzTSwyU0KUAzK63GDApfCdT8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
