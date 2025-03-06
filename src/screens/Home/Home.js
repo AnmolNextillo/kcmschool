@@ -79,7 +79,7 @@ const Home = () => {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.cardBox}
-              onPress={() => navigation.navigate('TimeTable')}>
+              onPress={() => navigation.navigate('TimeTable',{title:"Time Table",from:0})}>
               <TimeTableIcon />
               <Text style={styles.cardNameStyle}>Time Table</Text>
             </TouchableOpacity>
@@ -131,7 +131,7 @@ const Home = () => {
               <LeaveDetailIcon />
               <Text style={styles.cardNameStyle}>Leave Details</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.cardBox}>
+            <TouchableOpacity style={styles.cardBox} onPress={() => navigation.navigate('TimeTable',{title:"Annual Calendar",from:1})}>
               <AnnualCalenderIcon />
               <Text style={styles.cardNameStyle}>Annual Calendar</Text>
             </TouchableOpacity>
@@ -241,6 +241,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     gap: 12,
     width: '100%',
+    marginBottom:40
   },
   cardBoxLeft: {
     alignItems: 'center',

@@ -36,6 +36,7 @@ import TimeTable from './src/screens/TimeTable/index.js';
 import HomeWorkList from './src/screens/HomeWork/HomeWorkList.js';
 import messaging from '@react-native-firebase/messaging';
 import './src/component/firebase.js'
+import BookAppointment from './src/screens/BookAppointment/index.js';
 
 const Stack = createNativeStackNavigator();
 
@@ -81,6 +82,7 @@ function App() {
           <Stack.Screen name="Appointment" component={Appointment} options={{ title: 'Appointment' }} /> 
           <Stack.Screen name="TimeTable" component={TimeTable} options={{ title: 'TimeTable' }} /> 
           <Stack.Screen name="HomeWorkList" component={HomeWorkList} options={{ title: 'HomeWorkList' }} /> 
+          <Stack.Screen name="BookAppointment" component={BookAppointment} options={{ title: 'BookAppointment' }} /> 
         </Stack.Navigator>
     </NavigationContainer>
     <FlashMessage position="bottom" />

@@ -3,8 +3,12 @@ import React from 'react';
 import {useNavigation} from '@react-navigation/core';
 import {appColors} from '../../utils/color';
 
-const Event = () => {
+const Event = ({route}) => {
   const navigation = useNavigation();
+
+  const {item} = route.params
+
+  console.log("Item ====> ",item)
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -24,10 +28,10 @@ const Event = () => {
           <Text style={styles.headerText}>Event</Text>
         </View>
         <View style={{padding: 16}}>
-            <Text style={{fontSize:15,marginBottom:4,fontWeight:'500'}}>School</Text>
-            <Text style={{fontSize:14,marginBottom:20}}>abcdefghijklmnopqrstuvwxyz</Text>
+            <Text style={{fontSize:15,marginBottom:4,fontWeight:'500'}}>{item.title}</Text>
+            <Text style={{fontSize:14,marginBottom:20}}>{item.description}</Text>
             <Text style={{fontSize:15,fontWeight:'500',marginBottom:4}}>Event Date</Text>
-            <Text style={{fontSize:14,}}>1-1-25</Text>
+            <Text style={{fontSize:14,}}>{}</Text>
         </View>
       </View>
     </SafeAreaView>

@@ -1,14 +1,29 @@
-import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
-import {appColors} from '../../utils/color';
-import {useNavigation} from '@react-navigation/core';
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { appColors } from '../../utils/color';
+import { useNavigation } from '@react-navigation/core';
+import { useDispatch, useSelector } from 'react-redux';
+import { hitAnnouncements } from '../../redux/AnnouncementsSlice';
 
 const Conversation = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch()
+  const [data, setData] = useState(null)
+  const responseAnnouncements = useSelector((state) => state.announcementsReducer.data)
+
+  useEffect(() => {
+    dispatch(hitAnnouncements())
+  }, [])
+
+  useEffect(() => {
+    if (responseAnnouncements != null && responseAnnouncements.status == 1) {
+      setData(responseAnnouncements.data)
+    }
+  }, [responseAnnouncements])
 
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <View style={{flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
         {' '}
         <View
           style={{
@@ -17,24 +32,28 @@ const Conversation = () => {
             backgroundColor: appColors.white,
           }}>
           <Text
-            style={{color: appColors.primaryColor}}
+            style={{ color: appColors.primaryColor }}
             onPress={() => navigation.goBack()}>
             Back
           </Text>
           <Text style={styles.headerText}>Annoucements</Text>
         </View>
-        <ScrollView style={{padding: 16}}>
-          <Text style={styles.schoolText}>School</Text>
-          <Text style={styles.conversationDate}>
-            abcdefghijklmnopqrstuvwxyz
-          </Text>
-          <View>
+        <ScrollView style={{ padding: 16 }}>
+          {data != null && data.map((item) => 
             <View>
-              <Text style={styles.adminustratorStyle}>Administrator</Text>
-              <Text>(1)</Text>
+              <Text style={styles.schoolText}>{item.title}</Text>
+              <Text style={styles.conversationDate}>
+                {item.description}
+              </Text>
+              {/* <View>
+                <View>
+                  <Text style={styles.adminustratorStyle}>Administrator</Text>
+                  <Text>(1)</Text>
+                </View>
+                <Text style={styles.conversationDate}>1-1-2025</Text>
+              </View> */}
             </View>
-            <Text style={styles.conversationDate}>1-1-2025</Text>
-          </View>
+          )}
         </ScrollView>
       </View>
     </SafeAreaView>
@@ -64,8 +83,8 @@ const styles = StyleSheet.create({
     paddingBottom: 12,
     fontSize: 12,
   },
-  adminustratorStyle:{
-    color:appColors.primaryColor,
+  adminustratorStyle: {
+    color: appColors.primaryColor,
     fontSize: 14,
     marginBottom: 4,
     fontWeight: '500',

@@ -12,6 +12,11 @@ export const changePassword = 'student/changePassword';
 export const mySubjects = 'student/mySubjects';
 export const timeTable = 'student/timeTable';
 export const homeWork = 'student/homeWork';
+export const leaves = 'student/leaves';
+export const announceMents = 'student/announceMents';
+export const events = 'student/events';
+export const annualCalender = 'student/annualCalender';
+export const appointments = 'student/appointments';
 
 
 export const handleShowMessage = (message,type) => {
@@ -19,5 +24,11 @@ export const handleShowMessage = (message,type) => {
       message: "KCM School",
       description: message,
       type: type, // 'success', 'info', 'warning', 'danger'
+      position:'top'
     });
+  };
+
+  export const formatDate = (isoString) => {
+    const date = new Date(isoString);
+    return date.toLocaleDateString("en-US", { month: "short", day: "2-digit", year: "numeric" });
   };

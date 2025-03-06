@@ -22,7 +22,9 @@ const HomeWorkList = ({navigation}) => {
   }, []);
 
   useEffect(() => {
+    if(responseHomeWork!=null && responseHomeWork.status==1){
     setHomeWork(responseHomeWork.data);
+    }
   }, [responseHomeWork]);
 
   return (
@@ -43,7 +45,6 @@ const HomeWorkList = ({navigation}) => {
         </View>
         <ScrollView style={{padding: 16}}>
           <View style={styles.container}>
-            {console.log("Home Work  ====> ",homeWork)}
             {homeWork != null &&
               homeWork.map((item) => 
                ( <TouchableOpacity style={styles.container} >

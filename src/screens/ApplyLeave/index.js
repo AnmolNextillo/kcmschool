@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -7,11 +7,16 @@ import {
   StyleSheet,
   SafeAreaView,
   Button,
+  ActivityIndicator,
 } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { appColors } from '../../utils/color';
 import ArrowRight from '../../assets/svg/ArrowIcon';
 import BottomListModal from '../../component/BottomListModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearApplyLeave, hitApplyLeave } from '../../redux/ApplyLeaveSlice';
+import moment from 'moment';
+import { handleShowMessage } from '../../utils/Constants';
 
 const ApplyLeave = ({ navigation }) => {
   const [leaveType, setLeaveType] = useState('Select Leave Type');
@@ -19,11 +24,42 @@ const ApplyLeave = ({ navigation }) => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [reason, setReason] = useState('');
-  const data = ['Option 1', 'Option 2', 'Option 3', 'Option 4'];
+  const [isLoading, setIsLoading] = useState(false);
+  const data = ['Sick Leave', 'Casual Leave'];
+
+  const dispatch = useDispatch()
+  const responseApplyLeave = useSelector((state) => state.applyLeaveReducer.data)
 
   const handleSubmit = () => {
-    console.log('Leave Applied:', { leaveType, startDate, endDate, reason });
+    if (leaveType == 'Select Leave Type') {
+      handleShowMessage("Please select leave type.", "danger")
+    }
+    else if (reason == '') {
+      handleShowMessage("Please enter reason.", "danger")
+    } else {
+      const payload = {
+        startDate: moment(startDate.toISOString().split("T")[0]).format("DD-MMM-YY"),
+        endDate: moment(endDate.toISOString().split("T")[0]).format("DD-MMM-YY"),
+        type: leaveType == "Sick Leave" ? 2 : 1,
+        reason: reason
+      }
+      dispatch(hitApplyLeave(payload))
+    }
   };
+
+  useEffect(() => {
+    if (responseApplyLeave != null && responseApplyLeave.status == 1) {
+      handleShowMessage("Leave Applied Successfully.", "success")
+      setReason("")
+      setStartDate(new Date())
+      setEndDate(new Date())
+      dispatch(clearApplyLeave())
+    } else {
+      if (responseApplyLeave != null) {
+        handleShowMessage(responseApplyLeave.message, "danger")
+      }
+    }
+  }, [responseApplyLeave])
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -43,17 +79,17 @@ const ApplyLeave = ({ navigation }) => {
 
       <View style={styles.container}>
         {/* Leave Type Dropdown */}
-        <View style={{borderColor:appColors.black,borderWidth:1,borderRadius:8,padding:16,flexDirection:'row',alignItems:'center'}}>
-          <Text style={{flex:1,color:appColors.black}}>{leaveType}</Text>
-          <TouchableOpacity style={{ transform: [{ rotate: '90deg' }] }} onPress={()=>setMenuVisible(true)}>
-            <ArrowRight/>
+        <View style={{ borderColor: appColors.black, borderWidth: 1, borderRadius: 8, padding: 16, flexDirection: 'row', alignItems: 'center' }}>
+          <Text style={{ flex: 1, color: appColors.black }} onPress={() => setMenuVisible(true)}>{leaveType}</Text>
+          <TouchableOpacity style={{ transform: [{ rotate: '90deg' }] }} onPress={() => setMenuVisible(true)}>
+            <ArrowRight />
           </TouchableOpacity>
         </View>
 
         {/* Start Date Picker */}
-        <View style={{ flexDirection: 'row', alignItems: 'center',marginTop:16 }}>
-          <View style={{flex:1,alignItems:'center'}}>
-            <Text style={styles.label}>Start Date</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 16 }}>
+          <View style={{ flex: 1, alignItems: 'center' }}>
+            <Text style={styles.label}>Start Date </Text>
             <DateTimePicker
               style={styles.datePicker}
               mode="date"
@@ -64,7 +100,7 @@ const ApplyLeave = ({ navigation }) => {
               cancelBtnText="Cancel"
               onChange={(event, date) => setStartDate(date)} />
           </View>
-          <View style={{flex:1,alignItems:'center'}}>
+          <View style={{ flex: 1, alignItems: 'center' }}>
             <Text style={styles.label}>End Date</Text>
             <DateTimePicker
               style={styles.datePicker}
@@ -105,14 +141,28 @@ const ApplyLeave = ({ navigation }) => {
         />
 
         {/* Submit Button */}
-        <TouchableOpacity style={{padding:16,backgroundColor:appColors.primaryColor,borderRadius:8,alignItems:'center'}}>
+        {/* <TouchableOpacity style={{padding:16,backgroundColor:appColors.primaryColor,borderRadius:8,alignItems:'center'}}>
         <Text
           onPress={handleSubmit}
           style={{ backgroundColor: appColors.primaryColor,fontWeight:'600',color:appColors.white }}>
           Apply Leave
         </Text>
+        </TouchableOpacity> */}
+
+        <TouchableOpacity
+          style={{ padding: 16, backgroundColor: appColors.primaryColor, borderRadius: 8, alignItems: 'center' }}
+          onPress={() => handleSubmit()}>
+          {!isLoading ? (
+            <Text style={{ backgroundColor: appColors.primaryColor, fontWeight: '600', color: appColors.white }}>Apply Leave</Text>
+          ) : (
+            <ActivityIndicator
+              size="small"
+              color={appColors.white}
+              style={{ margin: 15 }}
+            />
+          )}
         </TouchableOpacity>
-       <BottomListModal isModalVisible={menuVisible} setModalVisible={setMenuVisible} data={data} setLeaveType={setLeaveType}/>
+        <BottomListModal isModalVisible={menuVisible} setModalVisible={setMenuVisible} data={data} setLeaveType={setLeaveType} />
       </View>
     </SafeAreaView>
   );

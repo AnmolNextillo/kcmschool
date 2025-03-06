@@ -7,6 +7,13 @@ import changePasswordReducer from './ChangePasswordSlice';
 import getSubjectReducer from './GetSubjectSlice';
 import timeTableReducer from './TimeTableSlice';
 import homeWorkReducer from './HomeWorkSlice';
+import getLeaveReducer from './GetLeaveSlice';
+import applyLeaveReducer from './ApplyLeaveSlice';
+import announcementsReducer from './AnnouncementsSlice';
+import getEventReducer from './GetEventSlice';
+import annualCalenderReducer from './GetAnnualCalender';
+import bookAppointmentReducer from './BookAppointmentSlice';
+import getAppointmentsReducer from './GetAppointmentsSlice';
 
 const store = configureStore({
   reducer: {
@@ -18,6 +25,13 @@ const store = configureStore({
     getSubjectReducer: getSubjectReducer,
     timeTableReducer: timeTableReducer,
     homeWorkReducer: homeWorkReducer,
+    getLeaveReducer: getLeaveReducer,
+    applyLeaveReducer: applyLeaveReducer,
+    announcementsReducer: announcementsReducer,
+    getEventReducer: getEventReducer,
+    annualCalenderReducer: annualCalenderReducer,
+    bookAppointmentReducer: bookAppointmentReducer,
+    getAppointmentsReducer: getAppointmentsReducer,
   },
 });
 

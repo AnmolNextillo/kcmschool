@@ -1,40 +1,59 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {View, FlatList, Text, StyleSheet, SafeAreaView} from 'react-native';
 import {Card, Badge} from 'react-native-paper';
 import { appColors } from '../../utils/color';
+import { useDispatch, useSelector } from 'react-redux';
+import { hitGetLeave } from '../../redux/GetLeaveSlice';
 
 const LeaveDetails = ({navigation}) => {
-  const leaveData = [
-    {
-      id: '1',
-      type: 'Sick Leave',
-      startDate: '2025-02-20',
-      endDate: '2025-02-22',
-      status: 'Approved',
-    },
-    {
-      id: '2',
-      type: 'Casual Leave',
-      startDate: '2025-03-01',
-      endDate: '2025-03-03',
-      status: 'Pending',
-    },
-    {
-      id: '3',
-      type: 'Annual Leave',
-      startDate: '2025-04-15',
-      endDate: '2025-04-20',
-      status: 'Rejected',
-    },
-  ];
+
+  const dispatch = useDispatch()
+
+  const responseLeave = useSelector((state)=>state.getLeaveReducer.data)
+
+  const [leaveData,setLeaveData] =useState(null)
+
+  useEffect(()=>{
+    dispatch(hitGetLeave())
+  },[])
+
+  useEffect(()=>{
+    if(responseLeave!=null && responseLeave.status == 1){
+      setLeaveData(responseLeave.data)
+    }
+  },[responseLeave])
+
+  // const leaveData = [
+  //   {
+  //     id: '1',
+  //     type: 'Sick Leave',
+  //     startDate: '2025-02-20',
+  //     endDate: '2025-02-22',
+  //     status: 'Approved',
+  //   },
+  //   {
+  //     id: '2',
+  //     type: 'Casual Leave',
+  //     startDate: '2025-03-01',
+  //     endDate: '2025-03-03',
+  //     status: 'Pending',
+  //   },
+  //   {
+  //     id: '3',
+  //     type: 'Annual Leave',
+  //     startDate: '2025-04-15',
+  //     endDate: '2025-04-20',
+  //     status: 'Rejected',
+  //   },
+  // ];
 
   const getStatusColor = status => {
     switch (status) {
-      case 'Approved':
+      case 1:
         return 'green';
-      case 'Pending':
+      case 0:
         return 'orange';
-      case 'Rejected':
+      case 2:
         return 'red';
       default:
         return 'gray';
@@ -43,7 +62,10 @@ const LeaveDetails = ({navigation}) => {
 
   const renderItem = ({item}) => (
     <View style={styles.card}>
-        <Text style={styles.leaveType}>{item.type}</Text>
+        <Text style={styles.leaveType}>{item.type==1?"Casual Leave":"Sick Leave"}</Text>
+        <Text style={styles.date}>
+          {item.reason}
+        </Text>
         <Text style={styles.date}>
           {item.startDate} → {item.endDate}
         </Text>
@@ -52,9 +74,8 @@ const LeaveDetails = ({navigation}) => {
             styles.badge,
             {backgroundColor: getStatusColor(item.status),padding:8},
           ]}>
-          {item.status}
+          {item.status==0?"Pending":item.status==1?"Approved":"Rejected"}
         </Text>
-     
     </View>
   );
 
@@ -71,7 +92,7 @@ const LeaveDetails = ({navigation}) => {
           onPress={() => navigation.goBack()}>
           Back
         </Text>
-        <Text style={styles.headerText}>Apply Leave</Text>
+        <Text style={styles.headerText}>Leave Details</Text>
       </View>
       <View style={styles.container}>
         <FlatList

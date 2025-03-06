@@ -17,7 +17,7 @@ const BottomListModal = ({ isModalVisible, setModalVisible, data = [], setLeaveT
     >
       <View style={styles.overlay}>
         <View style={styles.modalContent}>
-          <Text style={styles.modalTitle}>Select an Option</Text>
+          <Text style={styles.modalTitle}>Select Leave Type</Text>
 
           <FlatList
             data={data}

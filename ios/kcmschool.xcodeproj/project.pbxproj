@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
-		57ED7C95A853EA6E406683EB /* libPods-kcmschool.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5AD8CE55AE85CEF24C01895 /* libPods-kcmschool.a */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		A617A024A8978F70DC5D22A2 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
+		B47BDD4F3952A13FC604D447 /* libPods-kcmschool.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2C74D5D5841373D5E4D66AB /* libPods-kcmschool.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,13 +19,13 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = kcmschool/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = kcmschool/Info.plist; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = kcmschool/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		20742E40819B6E99C7CE2590 /* Pods-kcmschool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kcmschool.release.xcconfig"; path = "Target Support Files/Pods-kcmschool/Pods-kcmschool.release.xcconfig"; sourceTree = "<group>"; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = kcmschool/AppDelegate.swift; sourceTree = "<group>"; };
-		7B753CC52A3DB4A8F314B345 /* Pods-kcmschool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kcmschool.release.xcconfig"; path = "Target Support Files/Pods-kcmschool/Pods-kcmschool.release.xcconfig"; sourceTree = "<group>"; };
 		7C81D8A92D77114500176B6C /* kcmschool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = kcmschool.entitlements; path = kcmschool/kcmschool.entitlements; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = kcmschool/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		C5AD8CE55AE85CEF24C01895 /* libPods-kcmschool.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-kcmschool.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D1896D30C5DBC8FAD906AE36 /* Pods-kcmschool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kcmschool.debug.xcconfig"; path = "Target Support Files/Pods-kcmschool/Pods-kcmschool.debug.xcconfig"; sourceTree = "<group>"; };
+		BBAAC58FF7803E9139B60BD9 /* Pods-kcmschool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kcmschool.debug.xcconfig"; path = "Target Support Files/Pods-kcmschool/Pods-kcmschool.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		F2C74D5D5841373D5E4D66AB /* libPods-kcmschool.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-kcmschool.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,7 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57ED7C95A853EA6E406683EB /* libPods-kcmschool.a in Frameworks */,
+				B47BDD4F3952A13FC604D447 /* libPods-kcmschool.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,7 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				C5AD8CE55AE85CEF24C01895 /* libPods-kcmschool.a */,
+				F2C74D5D5841373D5E4D66AB /* libPods-kcmschool.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -94,8 +94,8 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				D1896D30C5DBC8FAD906AE36 /* Pods-kcmschool.debug.xcconfig */,
-				7B753CC52A3DB4A8F314B345 /* Pods-kcmschool.release.xcconfig */,
+				BBAAC58FF7803E9139B60BD9 /* Pods-kcmschool.debug.xcconfig */,
+				20742E40819B6E99C7CE2590 /* Pods-kcmschool.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -107,14 +107,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "kcmschool" */;
 			buildPhases = (
-				417395D34A915BF089A3A3FE /* [CP] Check Pods Manifest.lock */,
+				6D48695EA94E15C50D72A56E /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				5AA004F05E5F2A723DBE00A5 /* [CP] Embed Pods Frameworks */,
-				2F8BBB16E203B856B5918267 /* [CP] Copy Pods Resources */,
-				ED780911458775AE37E030F7 /* [CP-User] [RNFB] Core Configuration */,
+				942012375D2F5AE65002CA8A /* [CP] Embed Pods Frameworks */,
+				119E59D547C1F3AD3B4E5FBA /* [CP] Copy Pods Resources */,
+				DEE8939168C8D6EA525135EE /* [CP-User] [RNFB] Core Configuration */,
 			);
 			buildRules = (
 			);
@@ -186,7 +186,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		2F8BBB16E203B856B5918267 /* [CP] Copy Pods Resources */ = {
+		119E59D547C1F3AD3B4E5FBA /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -203,7 +203,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-kcmschool/Pods-kcmschool-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		417395D34A915BF089A3A3FE /* [CP] Check Pods Manifest.lock */ = {
+		6D48695EA94E15C50D72A56E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -225,7 +225,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5AA004F05E5F2A723DBE00A5 /* [CP] Embed Pods Frameworks */ = {
+		942012375D2F5AE65002CA8A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -242,7 +242,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-kcmschool/Pods-kcmschool-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		ED780911458775AE37E030F7 /* [CP-User] [RNFB] Core Configuration */ = {
+		DEE8939168C8D6EA525135EE /* [CP-User] [RNFB] Core Configuration */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -271,7 +271,7 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D1896D30C5DBC8FAD906AE36 /* Pods-kcmschool.debug.xcconfig */;
+			baseConfigurationReference = BBAAC58FF7803E9139B60BD9 /* Pods-kcmschool.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -305,7 +305,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7B753CC52A3DB4A8F314B345 /* Pods-kcmschool.release.xcconfig */;
+			baseConfigurationReference = 20742E40819B6E99C7CE2590 /* Pods-kcmschool.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
