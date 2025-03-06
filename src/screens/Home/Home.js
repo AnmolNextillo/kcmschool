@@ -164,12 +164,11 @@ const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
     backgroundColor: appColors.offWhite,
-    paddingBottom: 120,
+    paddingBottom: 80,
   },
   containerScrollStyle: {
     flex: 1,
     backgroundColor: appColors.offWhite,
-    marginBottom:40
   },
   headerStyle: {
     backgroundColor: appColors.bgBlack,

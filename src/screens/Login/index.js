@@ -168,7 +168,8 @@ const styles = StyleSheet.create({
     borderColor: appColors.grey,
     borderRadius: 8,
     marginVertical: 10,
-    padding:16
+    height:45,
+    paddingHorizontal:8
   },
   textInputStyle: {
     borderRadius: 4,
@@ -185,13 +186,16 @@ const styles = StyleSheet.create({
     marginTop: 24,
     backgroundColor: appColors.primaryColor,
     borderRadius: 4,
+    height:45,
+    alignItems:'center',
+    justifyContent:'center'
   },
   loginButtonStyle: {
     fontSize: 16,
     fontWeight: '700',
     color: appColors.white,
     textAlign: 'center',
-    padding: 16,
+   
   },
   titleStyle: {
     marginTop: 16,

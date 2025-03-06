@@ -34,35 +34,27 @@ import { Provider } from 'react-redux';
 import FlashMessage from 'react-native-flash-message';
 import TimeTable from './src/screens/TimeTable/index.js';
 import HomeWorkList from './src/screens/HomeWork/HomeWorkList.js';
-import messaging, { getMessaging } from '@react-native-firebase/messaging';
+import messaging from '@react-native-firebase/messaging';
+import './src/component/firebase.js'
 
 const Stack = createNativeStackNavigator();
 
 
 function App() {
 
-  async function requestUserPermission() {
-    const authStatus = await getMessaging().requestPermission();
-    const enabled =
-      authStatus === getMessaging.AuthorizationStatus.AUTHORIZED ||
-      authStatus === getMessaging.AuthorizationStatus.PROVISIONAL;
-  
-    if (enabled) {
-      console.log('Notification permission granted.');
+  const getFcmToken = async () => {
+    try {
+      const newFcmToken = await messaging().getToken();
+      console.log(newFcmToken);
+      return newFcmToken;
+    } catch (error) {
+      console.error(error);
+      return null;
     }
-  }
+  };
 
-  async function getFCMToken() {
-    console.log("Heyyy")
-    const token = await getMessaging().getToken();
-    console.log('FCM Token:', token);
-  }
-  
-  
-
-  useEffect(()=>{
-    requestUserPermission();
-    getFCMToken();
+  useEffect(()=>{  
+    getFcmToken()
   },[])
 
   return (
