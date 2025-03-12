@@ -49,7 +49,7 @@ const Home = () => {
         <View style={styles.CardTopStyle}>
           <Text style={styles.AcademicText}>Academics</Text>
           <View style={styles.CardStyle}>
-            <TouchableOpacity style={styles.cardBox}>
+            <TouchableOpacity style={styles.cardBox}  onPress={() => navigation.navigate('Attendence')}>
               <View style={styles.imageBoxStyle}>
                 <AttendenceIcon />
               </View>
