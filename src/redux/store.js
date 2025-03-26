@@ -14,6 +14,9 @@ import getEventReducer from './GetEventSlice';
 import annualCalenderReducer from './GetAnnualCalender';
 import bookAppointmentReducer from './BookAppointmentSlice';
 import getAppointmentsReducer from './GetAppointmentsSlice';
+import getTestsReducer from './GetTestsSlice';
+import getTestDetailReducer from './GetTestDetailSlice';
+import ackTestReducer from './AcknowladgeTestSlice';
 
 const store = configureStore({
   reducer: {
@@ -32,6 +35,9 @@ const store = configureStore({
     annualCalenderReducer: annualCalenderReducer,
     bookAppointmentReducer: bookAppointmentReducer,
     getAppointmentsReducer: getAppointmentsReducer,
+    getTestsReducer: getTestsReducer,
+    getTestDetailReducer: getTestDetailReducer,
+    ackTestReducer: ackTestReducer,
   },
 });
 

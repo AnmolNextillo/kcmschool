@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import { appColors } from '../../utils/color'
 import { Calendar, LocaleConfig } from 'react-native-calendars';
@@ -22,6 +22,7 @@ const Attendence = ({navigation}) => {
                 </Text>
                 <Text style={styles.headerText}>Apply Leave</Text>
             </View>
+            <ScrollView>
             <Text style={{ fontWeight: '600', color: app.black, fontSize: 18, padding: 16, textAlign: 'center' }}>
                 Overall Attendance till 11 Mar, 2025 (Days Attented/Total Working Days)
             </Text>
@@ -35,18 +36,18 @@ const Attendence = ({navigation}) => {
                     onDayPress={day => {
                         setSelected(day.dateString);
                     }}
-                    markedDates={{
-                        '2025-03-01': { selected: true, marked: true, selectedColor: 'green' },
-                        '2025-03-02': { marked: true },
-                        '2025-03-03': { selected: true, marked: true, selectedColor: 'blue' }
-                    }}
+                    // markedDates={{
+                    //     '2025-03-01': { selected: true, marked: true, selectedColor: 'green' },
+                    //     '2025-03-02': { marked: true },
+                    //     '2025-03-03': { selected: true, marked: true, selectedColor: 'blue' }
+                    // }}
                 />
             </View>
 
             <View style={{ padding: 16, margin: 16, backgroundColor: appColors.white, borderRadius: 8 }}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <View style={{ flex: 1, flexDirection: 'row' }}>
-                        <View style={{ backgroundColor: appColors.green, height: 20, width: 20, borderRadius: 10 }} />
+                        <View style={{ backgroundColor: appColors.greenLight, height: 20, width: 20, borderRadius: 10 }} />
                         <Text style={{ marginHorizontal: 8 }}>Present</Text>
                     </View>
                     <View style={{ flex: 1, flexDirection: 'row' }}>
@@ -56,46 +57,32 @@ const Attendence = ({navigation}) => {
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 16 }}>
                     <View style={{ flex: 1, flexDirection: 'row' }}>
-                        <View style={{ backgroundColor: appColors.green, height: 20, width: 20, borderRadius: 10 }} />
-                        <Text style={{ marginHorizontal: 8 }}>Present</Text>
+                        <View style={{ backgroundColor: appColors.brown, height: 20, width: 20, borderRadius: 10 }} />
+                        <Text style={{ marginHorizontal: 8 }}>Out Station</Text>
                     </View>
                     <View style={{ flex: 1, flexDirection: 'row' }}>
-                        <View style={{ backgroundColor: appColors.red, height: 20, width: 20, borderRadius: 10 }} />
-                        <Text style={{ marginHorizontal: 8 }}>Absent</Text>
-                    </View>
-                </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 16 }}>
-                    <View style={{ flex: 1, flexDirection: 'row' }}>
-                        <View style={{ backgroundColor: appColors.green, height: 20, width: 20, borderRadius: 10 }} />
-                        <Text style={{ marginHorizontal: 8 }}>Present</Text>
-                    </View>
-                    <View style={{ flex: 1, flexDirection: 'row' }}>
-                        <View style={{ backgroundColor: appColors.red, height: 20, width: 20, borderRadius: 10 }} />
-                        <Text style={{ marginHorizontal: 8 }}>Absent</Text>
+                        <View style={{ backgroundColor: appColors.lightBlue, height: 20, width: 20, borderRadius: 10 }} />
+                        <Text style={{ marginHorizontal: 8 }}>Holiday</Text>
                     </View>
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 16 }}>
                     <View style={{ flex: 1, flexDirection: 'row' }}>
-                        <View style={{ backgroundColor: appColors.green, height: 20, width: 20, borderRadius: 10 }} />
-                        <Text style={{ marginHorizontal: 8 }}>Present</Text>
+                        <View style={{ backgroundColor: appColors.orange, height: 20, width: 20, borderRadius: 10 }} />
+                        <Text style={{ marginHorizontal: 8 }}>Leave</Text>
                     </View>
                     <View style={{ flex: 1, flexDirection: 'row' }}>
-                        <View style={{ backgroundColor: appColors.red, height: 20, width: 20, borderRadius: 10 }} />
-                        <Text style={{ marginHorizontal: 8 }}>Absent</Text>
+                        <View style={{ backgroundColor: appColors.green, height: 20, width: 20, borderRadius: 10 }} />
+                        <Text style={{ marginHorizontal: 8 }}>Online Present</Text>
                     </View>
-                </View>
+                </View>     
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 16 }}>
                     <View style={{ flex: 1, flexDirection: 'row' }}>
-                        <View style={{ backgroundColor: appColors.green, height: 20, width: 20, borderRadius: 10 }} />
-                        <Text style={{ marginHorizontal: 8 }}>Present</Text>
-                    </View>
-                    <View style={{ flex: 1, flexDirection: 'row' }}>
-                        <View style={{ backgroundColor: appColors.red, height: 20, width: 20, borderRadius: 10 }} />
-                        <Text style={{ marginHorizontal: 8 }}>Absent</Text>
+                        <View style={{ backgroundColor: appColors.darkBrown, height: 20, width: 20, borderRadius: 10 }} />
+                        <Text style={{ marginHorizontal: 8 }}>Online Absent</Text>
                     </View>
                 </View>
             </View>
-
+            </ScrollView>
         </SafeAreaView>
     )
 }

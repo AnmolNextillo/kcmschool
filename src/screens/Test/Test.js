@@ -4,14 +4,34 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {appColors} from '../../utils/color';
 import {useNavigation} from '@react-navigation/core';
+import {useDispatch, useSelector} from 'react-redux';
+import {hitTests} from '../../redux/GetTestsSlice';
 
 const Test = () => {
   const navigation = useNavigation();
+
+  const dispatch = useDispatch();
+
+  const responseTests = useSelector(state => state.getTestsReducer.data);
+
+  const [tests, setTest] = useState(null);
+
+  useEffect(() => {
+    dispatch(hitTests());
+  }, []);
+
+  useEffect(() => {
+    console.log('responseTests test ===>', responseTests);
+    if (responseTests != null && responseTests.status == 1) {
+      setTest(responseTests.data);
+    }
+  }, [responseTests]);
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -31,10 +51,15 @@ const Test = () => {
           <Text style={styles.headerText}>Tests</Text>
         </View>
         <ScrollView style={{padding: 16}}>
-          <Text style={styles.testList}>Test 1</Text>
-          <Text style={styles.testList}>Test 2</Text>
-          <Text style={styles.testList}>Test 3</Text>
-          <Text style={styles.testList}>Test 4</Text>
+          {tests != null &&
+            tests.map((item, index) => (
+              <TouchableOpacity style={styles.testList} onPress={()=>navigation.navigate("TestDetail",{data:item})}>
+              <Text >
+                {index + 1}. {item.title} {'(' + item.subjectId.name + ')'}
+              </Text>
+              <Text style={{marginTop:8,color:appColors.grey}}>Date : {item.date}</Text>
+              </TouchableOpacity>
+            ))}
         </ScrollView>
       </View>
     </SafeAreaView>
@@ -55,8 +80,8 @@ const styles = StyleSheet.create({
   testList: {
     fontSize: 14,
     marginBottom: 8,
-    padding:16,
-    backgroundColor:appColors.white,
-    borderRadius:8
+    padding: 16,
+    backgroundColor: appColors.white,
+    borderRadius: 8,
   },
 });

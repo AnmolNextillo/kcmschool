@@ -6,7 +6,8 @@ export const ApiBaseUrl = 'https://api.kcmschool.co.in/v1/';
 //Api Names
 export const loginApi = 'student/login';
 export const logout = 'student/logout';
-export const profile = 'student/profile';
+export const profile = 'student/profile';                   
+export const tests = 'student/tests';                   
 export const myClassMates = 'student/myClassMates';
 export const changePassword = 'student/changePassword';
 export const mySubjects = 'student/mySubjects';
@@ -17,6 +18,8 @@ export const announceMents = 'student/announceMents';
 export const events = 'student/events';
 export const annualCalender = 'student/annualCalender';
 export const appointments = 'student/appointments';
+export const testDetails = 'student/testDetails';
+export const ackTest = 'student/ackTest';
 
 
 export const handleShowMessage = (message,type) => {

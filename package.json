@@ -29,6 +29,7 @@
     "react-native-datepicker": "^1.7.2",
     "react-native-flash-message": "^0.4.2",
     "react-native-gesture-handler": "^2.22.1",
+    "react-native-maps": "^1.20.1",
     "react-native-modal": "^13.0.1",
     "react-native-otp-textinput": "^1.1.6",
     "react-native-paper": "^5.13.1",

@@ -38,6 +38,7 @@ import messaging from '@react-native-firebase/messaging';
 import './src/component/firebase.js'
 import BookAppointment from './src/screens/BookAppointment/index.js';
 import Attendence from './src/screens/Attendence/index.js';
+import TestDetail from './src/screens/TestDetail.js/index.js';
 
 const Stack = createNativeStackNavigator();
 
@@ -76,6 +77,7 @@ function App() {
           <Stack.Screen name="HomeWork" component={HomeWork} options={{ title: 'HomeWork' }} />
           <Stack.Screen name="Conversation" component={Conversation} options={{ title: 'Conversation' }} />
           <Stack.Screen name="Test" component={Test} options={{ title: 'Test' }} /> 
+          <Stack.Screen name="TestDetail" component={TestDetail} options={{ title: 'TestDetail' }} /> 
           <Stack.Screen name="Subjects" component={Subjects} options={{ title: 'Subjects' }} /> 
           <Stack.Screen name="ApplyLeave" component={ApplyLeave} options={{ title: 'ApplyLeave' }} /> 
           <Stack.Screen name="LeaveDetails" component={LeaveDetails} options={{ title: 'LeaveDetails' }} /> 

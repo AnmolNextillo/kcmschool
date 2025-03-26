@@ -70,8 +70,8 @@ const Profile = ({navigation}) => {
               <HomeProfileIcon style={{fill: appColors.white}} />
             </View>
             <Text style={styles.userName}>{profileData!=null?profileData.name:""} </Text>
-            <Text style={styles.admissionText}>Class : Nursery</Text>
-            <Text style={styles.admissionText}>Profile</Text>
+            <Text style={styles.admissionText}>Class : {profileData!=null?profileData.classId.name:""}</Text>
+            {/* <Text style={styles.admissionText}>Profile</Text> */}
           </View>
         </View>
         <View style={styles.CardTopStyle}>

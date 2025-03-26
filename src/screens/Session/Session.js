@@ -17,7 +17,6 @@ const Session = () => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={{flex: 1}}>
-        {' '}
         <View
           style={{
             flexDirection: 'row',
@@ -33,6 +32,9 @@ const Session = () => {
         </View>
         <ScrollView style={{padding: 16}}>
           <TouchableOpacity style={styles.sessionSelect}>
+            <Text style={styles.sessionText}>2025-2026</Text>
+          </TouchableOpacity>
+          {/* <TouchableOpacity style={styles.sessionSelect}>
             <Text style={styles.sessionText}>2019-2020</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.sessionSelect}>
@@ -43,10 +45,7 @@ const Session = () => {
           </TouchableOpacity>
           <TouchableOpacity style={styles.sessionSelect}>
             <Text style={styles.sessionText}>2019-2020</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.sessionSelect}>
-            <Text style={styles.sessionText}>2019-2020</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </ScrollView>
       </View>
     </SafeAreaView>

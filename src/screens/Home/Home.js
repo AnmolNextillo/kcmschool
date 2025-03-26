@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {appColors} from '../../utils/color';
 import HomeProfileIcon from '../../assets/svg/HomeProfileIcon';
 import {getImage} from '../../utils/getImages';
@@ -26,9 +26,27 @@ import LeaveDetailIcon from '../../assets/svg/LeaveDetailIcon';
 import AnnualCalenderIcon from '../../assets/svg/AnnualCalenderIcon';
 import PaymentHistoryIcon from '../../assets/svg/PaymentHistoryIcon';
 import OnlinePaymentIcon from '../../assets/svg/OnlinePaymentIcon';
+import { hitProfile } from '../../redux/GetProfileSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Home = () => {
   const navigation = useNavigation();
+
+  const dispatch = useDispatch()
+
+  const responseProfile = useSelector((state) => state.getProfileReducer.data) 
+  
+  const [profileData,setProfileData] = useState(null)
+
+    useEffect(()=>{
+      dispatch(hitProfile())
+    },[])
+
+      useEffect(()=>{
+        if(responseProfile!=null && responseProfile.status == 1){
+          setProfileData(responseProfile.data)
+        }
+      },[responseProfile])
 
   return (
     <SafeAreaView style={styles.containerStyle}>
@@ -41,9 +59,9 @@ const Home = () => {
             <View style={styles.profileImage}>
               <HomeProfileIcon style={{fill: appColors.white}} />
             </View>
-            <Text style={styles.userName}>Gurmandeep Singh</Text>
-            <Text style={styles.admissionText}>Adm No. : A-12345,</Text>
-            <Text style={styles.admissionText}>Parent</Text>
+            <Text style={styles.userName}>{profileData!=null?profileData.name:""}</Text>
+            <Text style={styles.admissionText}>Class :{profileData!=null?profileData.classId.name:""}</Text>
+            {/* <Text style={styles.admissionText}>Parent</Text> */}
           </View>
         </View>
         <View style={styles.CardTopStyle}>
