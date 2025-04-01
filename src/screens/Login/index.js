@@ -11,26 +11,50 @@ import {
 import React, {useEffect, useState} from 'react';
 import {getImage} from '../../utils/getImages';
 import {appColors} from '../../utils/color';
-import { ActivityIndicator } from 'react-native-paper';
-import { useDispatch, useSelector } from 'react-redux';
-import { clearLoginData, hitLogin } from '../../redux/LoginSlice';
-import { handleShowMessage } from '../../utils/Constants';
+import {ActivityIndicator} from 'react-native-paper';
+import {useDispatch, useSelector} from 'react-redux';
+import {clearLoginData, hitLogin} from '../../redux/LoginSlice';
+import {handleShowMessage} from '../../utils/Constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import LogoIcon from '../../assets/svg/LogoIcon';
 
 const Login = ({navigation}) => {
   const dispatch = useDispatch();
   const loginResponse = useSelector(state => state.loginReducer.data);
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('manishseera12@gmail.com');
+  const [password, setPassword] = useState('123456');
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const onLoginClick = async () => {
+  const [isSplash, setIsSplash] = useState(false);
 
+  const checkLogin = async () => {
+    const token = await AsyncStorage.getItem('token');
+    setTimeout(() => {
+      checkLogin();
+
+      if (token != null) {
+        setIsSplash(false);
+        navigation.reset({
+          index: 0,
+          routes: [{name: 'BottomBar'}], // replace 'NewScreen' with your target screen
+        });
+      } else {
+        setIsSplash(false);
+      }
+    }, 1500);
+  };
+
+  useEffect(() => {
+    checkLogin();
+    setIsSplash(true);
+  }, []);
+
+  const onLoginClick = async () => {
     if (email.length == 0) {
-      handleShowMessage("Please enter valid number", "danger");
-    }  else {
+      handleShowMessage('Please enter valid number', 'danger');
+    } else {
       setIsLoading(true);
       const payload = {
         email: email,
@@ -47,7 +71,7 @@ const Login = ({navigation}) => {
     if (loginResponse != null && loginResponse.status == 1) {
       setIsLoading(false);
       saveToken(loginResponse.token);
-      navigation.navigate("BottomBar")
+      navigation.navigate('BottomBar');
       dispatch(clearLoginData());
     } else if (loginResponse != null) {
       setIsLoading(false);
@@ -55,7 +79,7 @@ const Login = ({navigation}) => {
     }
   }, [loginResponse]);
 
-  const saveToken = async (token) => {
+  const saveToken = async token => {
     console.log('token ===> ', token);
     await AsyncStorage.setItem('token', token);
     await AsyncStorage.setItem('mobileNumber', mobileNumber);
@@ -65,98 +89,133 @@ const Login = ({navigation}) => {
     try {
       const currentVersion = DeviceInfo.getVersion();
 
-      console.log("CurrentVersion ===> ",currentVersion)
-      const latestVersion = Platform.OS==="android"?responseAppVersion.data[0].androidVersion:responseAppVersion.data[0].iosVersion;
-      const updateUrl = Platform.OS === "android" ? "https://play.google.com/store/apps/details?id=com.kiorapp" : "https://apps.apple.com/in/app/kior/id6736437490";
-  
-         if (currentVersion < latestVersion) {
+      console.log('CurrentVersion ===> ', currentVersion);
+      const latestVersion =
+        Platform.OS === 'android'
+          ? responseAppVersion.data[0].androidVersion
+          : responseAppVersion.data[0].iosVersion;
+      const updateUrl =
+        Platform.OS === 'android'
+          ? 'https://play.google.com/store/apps/details?id=com.kiorapp'
+          : 'https://apps.apple.com/in/app/kior/id6736437490';
+
+      if (currentVersion < latestVersion) {
         Alert.alert(
-          "Update Available",
-          `A new version (${latestVersion}) is available. Please update to continue.`,    
+          'Update Available',
+          `A new version (${latestVersion}) is available. Please update to continue.`,
           [
-            { text: "Update Now", onPress: () => Linking.openURL(updateUrl) },
+            {text: 'Update Now', onPress: () => Linking.openURL(updateUrl)},
             //  { text: "Later", style: "cancel" },
-          ].filter(Boolean)
+          ].filter(Boolean),
         );
       }
     } catch (error) {
-      console.log("Error checking for updates:", error);
+      console.log('Error checking for updates:', error);
     }
   };
 
   return (
     <SafeAreaView style={[styles.containerStyle, {padding: 16}]}>
-      <ScrollView style={styles.containerStyle}>
-        <Image
-          source={getImage('logo')}
+      {!isSplash ? (
+        <ScrollView style={styles.containerStyle}>
+          <Image
+            source={getImage('logo')}
+            style={{
+              justifyContent: 'center',
+              alignSelf: 'center',
+              height: 120,
+              width: 150,
+              marginTop: 48,
+            }}
+            resizeMode="contain"
+          />
+
+          <View style={styles.formAreaStyle}>
+            <Text style={styles.headerStyle}> Login </Text>
+
+            <Text style={styles.titleStyle}>Email</Text>
+            <View style={styles.inputContainer}>
+              <TextInput
+                placeholder="Email"
+                value={email}
+                onChangeText={setEmail}
+                style={{
+                  color: appColors.black,
+                }}
+              />
+            </View>
+
+            <Text style={styles.titleStyle}>Password</Text>
+
+            <View style={styles.inputContainer}>
+              <TextInput
+                placeholder="Enter Password"
+                style={{
+                  flex: 1,
+                  color: appColors.black,
+                }}
+                value={password}
+                onChangeText={setPassword}
+                placeholderTextColor="#A9A9A9" // appColors.grey alternative
+                secureTextEntry={!isPasswordVisible} // hides password when false
+              />
+            </View>
+
+            <TouchableOpacity
+              style={styles.loginButtonViewStyle}
+              onPress={() => onLoginClick()}>
+              {!isLoading ? (
+                <Text style={styles.loginButtonStyle}>Login</Text>
+              ) : (
+                <ActivityIndicator
+                  size="small"
+                  color={appColors.white}
+                  style={{margin: 15}}
+                />
+              )}
+            </TouchableOpacity>
+
+            <Text
+              style={{
+                marginTop: 16,
+                alignSelf: 'center',
+                fontSize: 16,
+              }}
+              onPress={() => navigation.navigate('ForgotPassword')}>
+              Forgot Password
+            </Text>
+          </View>
+        </ScrollView>
+      ) : (
+        <View
           style={{
+            backgroundColor: appColors.white,
+            alignItems: 'center',
             justifyContent: 'center',
-            alignSelf: 'center',
-            height: 120,
-            width: 150,
-            marginTop: 48,
-          }}
-          resizeMode="contain"
-        />
-
-        <View style={styles.formAreaStyle}>
-          <Text style={styles.headerStyle}> Login </Text>
-
-          <Text style={styles.titleStyle}>Email</Text>
-          <View
-            style={styles.inputContainer}>
-            <TextInput
-              placeholder="Email"
-              value={email}
-              onChangeText={setEmail}
-              style={{
-                color: appColors.black,
-              }}
-            />
-          </View>
-
-          <Text style={styles.titleStyle}>Password</Text>
-
-          <View style={styles.inputContainer}>
-            <TextInput
-              placeholder="Enter Password"
-              style={{
-                flex: 1,
-                color: appColors.black
-              }}
-              value={password}
-              onChangeText={setPassword}
-              placeholderTextColor="#A9A9A9" // appColors.grey alternative
-              secureTextEntry={!isPasswordVisible} // hides password when false
-            />
-            
-          </View>
-
-          <TouchableOpacity
-            style={styles.loginButtonViewStyle}
-            onPress={() => onLoginClick()}>
-               {!isLoading ? (
-            <Text style={styles.loginButtonStyle} >Login</Text>
-          ) : (
-            <ActivityIndicator
-              size="small"
-              color={appColors.white}
-              style={{ margin: 15 }}
-            />
-          )}
-          </TouchableOpacity>
-
+            flex: 1,
+          }}>
+          <Image
+            source={getImage('logo')}
+            style={{
+              justifyContent: 'center',
+              alignSelf: 'center',
+              height: 180,
+              width: 250,
+              marginTop: 48,
+            }}
+            resizeMode="contain"
+          />
           <Text
             style={{
-              marginTop: 16,
-              alignSelf: 'center',
-              fontSize: 16,
-            }}
-            onPress={() => navigation.navigate('ForgotPassword')}>
-            Forgot Password
+              color: appColors.black,
+              fontWeight: '600',
+              fontSize: 18,
+              marginTop: 8,
+            }}>
+            KCM School
           </Text>
         </View>
-      </ScrollView>
+      )}
     </SafeAreaView>
   );
 };
@@ -167,7 +226,7 @@ const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
     backgroundColor: appColors.white,
-    padding:16
+    padding: 16,
   },
   headerStyle: {
     color: appColors.primaryColor,
@@ -191,8 +250,8 @@ const styles = StyleSheet.create({
     borderColor: appColors.grey,
     borderRadius: 8,
     marginVertical: 10,
-    height:45,
-    paddingHorizontal:8
+    height: 45,
+    paddingHorizontal: 8,
   },
   textInputStyle: {
     borderRadius: 4,
@@ -209,16 +268,15 @@ const styles = StyleSheet.create({
     marginTop: 24,
     backgroundColor: appColors.primaryColor,
     borderRadius: 4,
-    height:45,
-    alignItems:'center',
-    justifyContent:'center'
+    height: 45,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   loginButtonStyle: {
     fontSize: 16,
     fontWeight: '700',
     color: appColors.white,
     textAlign: 'center',
-   
   },
   titleStyle: {
     marginTop: 16,
@@ -238,7 +296,8 @@ const styles = StyleSheet.create({
   },
 });
 
-{/* <TouchableOpacity
+{
+  /* <TouchableOpacity
               onPress={() => setIsPasswordVisible(!isPasswordVisible)}
               style={styles.iconStyle}>
               {isPasswordVisible ? (
@@ -264,4 +323,5 @@ const styles = StyleSheet.create({
                   resizeMode="contain"
                 />
               )}
-            </TouchableOpacity> */}
+            </TouchableOpacity> */
+}

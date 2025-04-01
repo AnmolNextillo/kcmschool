@@ -6,7 +6,7 @@
  */
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
 } from 'react-native';
@@ -39,6 +39,7 @@ import './src/component/firebase.js'
 import BookAppointment from './src/screens/BookAppointment/index.js';
 import Attendence from './src/screens/Attendence/index.js';
 import TestDetail from './src/screens/TestDetail.js/index.js';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createNativeStackNavigator();
 
@@ -60,10 +61,12 @@ function App() {
   //   getFcmToken()
   // },[])
 
+  
+
   return (
     <Provider store={store}>
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='Login'>
           <Stack.Screen name="Login" component={Login} options={{ title: 'Login' }} />
           <Stack.Screen name="ForgotPassword" component={ForgotPassword} options={{ title: 'Forgot Password' }} />
           <Stack.Screen name="OtpScreen" component={OtpScreen} options={{ title: 'OTP' }} />
