@@ -79,7 +79,7 @@ const Login = ({ navigation }) => {
   const checkForUpdates = async () => {
     try {
       const currentVersion = DeviceInfo.getVersion();
-
+      
       console.log("CurrentVersion ===> ", currentVersion)
       const latestVersion = Platform.OS === "android" ? responseAppVersion.data[0].androidVersion : responseAppVersion.data[0].iosVersion;
       const updateUrl = Platform.OS === "android" ? "https://play.google.com/store/apps/details?id=com.kcmschool" : "https://apps.apple.com/in/app/kcm-school/id6742997239";
