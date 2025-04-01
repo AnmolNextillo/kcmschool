@@ -8,17 +8,21 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
-import {getImage} from '../../utils/getImages';
-import {appColors} from '../../utils/color';
+import React, { useEffect, useState } from 'react';
+import { getImage } from '../../utils/getImages';
+import { appColors } from '../../utils/color';
 import { ActivityIndicator } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearLoginData, hitLogin } from '../../redux/LoginSlice';
 import { handleShowMessage } from '../../utils/Constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getAppVersionresp } from '../../redux/GetAppVersionSlice';
 
-const Login = ({navigation}) => {
-  const dispatch = useDispatch();
+const Login = ({ navigation }) => {
+
+  const dispatch = useDispatch()
+
+  const responseAppVersion = useSelector((state) => state.getAppVersionReducer.data)
   const loginResponse = useSelector(state => state.loginReducer.data);
 
   const [email, setEmail] = useState("");
@@ -30,7 +34,7 @@ const Login = ({navigation}) => {
 
     if (email.length == 0) {
       handleShowMessage("Please enter valid number", "danger");
-    }  else {
+    } else {
       setIsLoading(true);
       const payload = {
         email: email,
@@ -61,18 +65,29 @@ const Login = ({navigation}) => {
     await AsyncStorage.setItem('mobileNumber', mobileNumber);
   };
 
+  useEffect(() => {
+    dispatch(getAppVersionresp())
+  }, [])
+
+  useEffect(() => {
+    console.log("responseAppVersion response ===>", responseAppVersion)
+    if (responseAppVersion != null && responseAppVersion.status === 1) {
+      checkForUpdates()
+    }
+  }, [responseAppVersion])
+
   const checkForUpdates = async () => {
     try {
       const currentVersion = DeviceInfo.getVersion();
 
-      console.log("CurrentVersion ===> ",currentVersion)
-      const latestVersion = Platform.OS==="android"?responseAppVersion.data[0].androidVersion:responseAppVersion.data[0].iosVersion;
-      const updateUrl = Platform.OS === "android" ? "https://play.google.com/store/apps/details?id=com.kiorapp" : "https://apps.apple.com/in/app/kior/id6736437490";
-  
-         if (currentVersion < latestVersion) {
+      console.log("CurrentVersion ===> ", currentVersion)
+      const latestVersion = Platform.OS === "android" ? responseAppVersion.data[0].androidVersion : responseAppVersion.data[0].iosVersion;
+      const updateUrl = Platform.OS === "android" ? "https://play.google.com/store/apps/details?id=com.kcmschool" : "https://apps.apple.com/in/app/kcm-school/id6742997239";
+
+      if (currentVersion < 2.2) {
         Alert.alert(
           "Update Available",
-          `A new version (${latestVersion}) is available. Please update to continue.`,    
+          `A new version (${latestVersion}) is available. Please update to continue.`,
           [
             { text: "Update Now", onPress: () => Linking.openURL(updateUrl) },
             //  { text: "Later", style: "cancel" },
@@ -85,7 +100,7 @@ const Login = ({navigation}) => {
   };
 
   return (
-    <SafeAreaView style={[styles.containerStyle, {padding: 16}]}>
+    <SafeAreaView style={[styles.containerStyle, { padding: 16 }]}>
       <ScrollView style={styles.containerStyle}>
         <Image
           source={getImage('logo')}
@@ -129,21 +144,21 @@ const Login = ({navigation}) => {
               placeholderTextColor="#A9A9A9" // appColors.grey alternative
               secureTextEntry={!isPasswordVisible} // hides password when false
             />
-            
+
           </View>
 
           <TouchableOpacity
             style={styles.loginButtonViewStyle}
             onPress={() => onLoginClick()}>
-               {!isLoading ? (
-            <Text style={styles.loginButtonStyle} >Login</Text>
-          ) : (
-            <ActivityIndicator
-              size="small"
-              color={appColors.white}
-              style={{ margin: 15 }}
-            />
-          )}
+            {!isLoading ? (
+              <Text style={styles.loginButtonStyle} >Login</Text>
+            ) : (
+              <ActivityIndicator
+                size="small"
+                color={appColors.white}
+                style={{ margin: 15 }}
+              />
+            )}
           </TouchableOpacity>
 
           <Text
@@ -167,7 +182,7 @@ const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
     backgroundColor: appColors.white,
-    padding:16
+    padding: 16
   },
   headerStyle: {
     color: appColors.primaryColor,
@@ -191,8 +206,8 @@ const styles = StyleSheet.create({
     borderColor: appColors.grey,
     borderRadius: 8,
     marginVertical: 10,
-    height:45,
-    paddingHorizontal:8
+    height: 45,
+    paddingHorizontal: 8
   },
   textInputStyle: {
     borderRadius: 4,
@@ -209,16 +224,16 @@ const styles = StyleSheet.create({
     marginTop: 24,
     backgroundColor: appColors.primaryColor,
     borderRadius: 4,
-    height:45,
-    alignItems:'center',
-    justifyContent:'center'
+    height: 45,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   loginButtonStyle: {
     fontSize: 16,
     fontWeight: '700',
     color: appColors.white,
     textAlign: 'center',
-   
+
   },
   titleStyle: {
     marginTop: 16,
