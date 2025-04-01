@@ -21,8 +21,8 @@ const Login = ({navigation}) => {
   const dispatch = useDispatch();
   const loginResponse = useSelector(state => state.loginReducer.data);
 
-  const [email, setEmail] = useState("manishseera12@gmail.com");
-  const [password, setPassword] = useState('123456');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState('');
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -59,6 +59,29 @@ const Login = ({navigation}) => {
     console.log('token ===> ', token);
     await AsyncStorage.setItem('token', token);
     await AsyncStorage.setItem('mobileNumber', mobileNumber);
+  };
+
+  const checkForUpdates = async () => {
+    try {
+      const currentVersion = DeviceInfo.getVersion();
+
+      console.log("CurrentVersion ===> ",currentVersion)
+      const latestVersion = Platform.OS==="android"?responseAppVersion.data[0].androidVersion:responseAppVersion.data[0].iosVersion;
+      const updateUrl = Platform.OS === "android" ? "https://play.google.com/store/apps/details?id=com.kiorapp" : "https://apps.apple.com/in/app/kior/id6736437490";
+  
+         if (currentVersion < latestVersion) {
+        Alert.alert(
+          "Update Available",
+          `A new version (${latestVersion}) is available. Please update to continue.`,    
+          [
+            { text: "Update Now", onPress: () => Linking.openURL(updateUrl) },
+            //  { text: "Later", style: "cancel" },
+          ].filter(Boolean)
+        );
+      }
+    } catch (error) {
+      console.log("Error checking for updates:", error);
+    }
   };
 
   return (

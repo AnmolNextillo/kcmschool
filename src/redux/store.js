@@ -17,6 +17,7 @@ import getAppointmentsReducer from './GetAppointmentsSlice';
 import getTestsReducer from './GetTestsSlice';
 import getTestDetailReducer from './GetTestDetailSlice';
 import ackTestReducer from './AcknowladgeTestSlice';
+import myAttendanceReducer from './MyAttendanceSlice';
 
 const store = configureStore({
   reducer: {
@@ -38,6 +39,7 @@ const store = configureStore({
     getTestsReducer: getTestsReducer,
     getTestDetailReducer: getTestDetailReducer,
     ackTestReducer: ackTestReducer,
+    myAttendanceReducer: myAttendanceReducer,
   },
 });
 

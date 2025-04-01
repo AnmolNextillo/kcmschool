@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -8,17 +8,18 @@ import {
   SafeAreaView,
   Button,
   ActivityIndicator,
+  Platform,
 } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import {appColors} from '../../utils/color';
+import { appColors } from '../../utils/color';
 import ArrowRight from '../../assets/svg/ArrowIcon';
 import BottomListModal from '../../component/BottomListModal';
-import {useDispatch, useSelector} from 'react-redux';
-import {clearApplyLeave, hitApplyLeave} from '../../redux/ApplyLeaveSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearApplyLeave, hitApplyLeave } from '../../redux/ApplyLeaveSlice';
 import moment from 'moment';
-import {handleShowMessage} from '../../utils/Constants';
+import { handleShowMessage } from '../../utils/Constants';
 
-const ApplyLeave = ({navigation}) => {
+const ApplyLeave = ({ navigation }) => {
   const [leaveType, setLeaveType] = useState('Select Leave Type');
   const [menuVisible, setMenuVisible] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
@@ -68,7 +69,7 @@ const ApplyLeave = ({navigation}) => {
   }, [responseApplyLeave]);
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <View
         style={{
           flexDirection: 'row',
@@ -76,7 +77,7 @@ const ApplyLeave = ({navigation}) => {
           backgroundColor: appColors.white,
         }}>
         <Text
-          style={{color: appColors.primaryColor}}
+          style={{ color: appColors.primaryColor }}
           onPress={() => navigation.goBack()}>
           Back
         </Text>
@@ -95,12 +96,12 @@ const ApplyLeave = ({navigation}) => {
             alignItems: 'center',
           }}>
           <Text
-            style={{flex: 1, color: appColors.black}}
+            style={{ flex: 1, color: appColors.black }}
             onPress={() => setMenuVisible(true)}>
             {leaveType}
           </Text>
           <TouchableOpacity
-            style={{transform: [{rotate: '90deg'}]}}
+            style={{ transform: [{ rotate: '90deg' }] }}
             onPress={() => setMenuVisible(true)}>
             <ArrowRight />
           </TouchableOpacity>
@@ -108,51 +109,86 @@ const ApplyLeave = ({navigation}) => {
 
         {/* Start Date Picker */}
         <View
-          style={{flexDirection: 'row', alignItems: 'center', marginVertical: 16}}>
-          <View style={{flex: 1, alignItems: 'center'}}>
+          style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 16 }}>
+          {Platform.OS != "ios" ? <View style={{ flex: 1, alignItems: 'center' }}>
             {/* <Text style={styles.label}>Start Date </Text> */}
-            <TouchableOpacity style={{backgroundColor:appColors.primaryColor,paddingHorizontal:16,paddingVertical:8,borderRadius:8}} onPress={()=>setShowStartPicker(true)}>
-            {showStartPicker ? (
-              <DateTimePicker
-                style={styles.datePicker}
-                mode="date"
-                value={startDate}
-                placeholder="Select End Date"
-                format="YYYY-MM-DD"
-                confirmBtnText="Confirm"
-                cancelBtnText="Cancel"
-                onChange={(event, date) => {setStartDate(date);
-                  setShowStartPicker(false)
-                }}
-              />
-            ):  
-            <Text style={{color:appColors.white}}>{ moment(startDate.toISOString().split('T')[0]).format(
-              'DD-MMM-YY',
-            )}</Text>}
-            </TouchableOpacity>
-          </View>
-          <View style={{flex: 1, alignItems: 'center'}}>
-            {/* <Text style={styles.label}>End Date</Text> */}
-            <TouchableOpacity style={{backgroundColor:appColors.primaryColor,paddingHorizontal:16,paddingVertical:8,borderRadius:8}} onPress={()=>setShowEndPicker(true)}>
-              {showEndPicker ? 
+            <TouchableOpacity style={{ backgroundColor: appColors.primaryColor, paddingHorizontal: 16, paddingVertical: 8, borderRadius: 8 }} onPress={() => setShowStartPicker(true)}>
+              {showStartPicker ? (
                 <DateTimePicker
                   style={styles.datePicker}
                   mode="date"
-                  value={endDate}
+                  value={startDate}
                   placeholder="Select End Date"
                   format="YYYY-MM-DD"
                   confirmBtnText="Confirm"
                   cancelBtnText="Cancel"
-                  onChange={(event, date) => {setEndDate(date);
-                    setShowEndPicker(false)
+                  onChange={(event, date) => {
+                    setStartDate(date);
+                    setShowStartPicker(false)
                   }}
                 />
-              :
-              <Text style={{color:appColors.white}}>{ moment(endDate.toISOString().split('T')[0]).format(
-                'DD-MMM-YY',
-              )}</Text>}
+              ) :
+                <Text style={{ color: appColors.white }}>{moment(startDate.toISOString().split('T')[0]).format(
+                  'DD-MMM-YY',
+                )}</Text>}
             </TouchableOpacity>
-          </View>
+          </View> :
+
+            <View style={{ flex: 1, alignItems: 'center' }}><DateTimePicker
+              style={styles.datePicker}
+              mode="date"
+              value={startDate}
+              placeholder="Select End Date"
+              format="YYYY-MM-DD"
+              confirmBtnText="Confirm"
+              cancelBtnText="Cancel"
+              onChange={(event, date) => {
+                setStartDate(date);
+                setShowStartPicker(false)
+              }}
+            />
+            </View>
+          }
+          {Platform.OS != "ios" ?
+            <View style={{ flex: 1, alignItems: 'center' }}>
+              {/* <Text style={styles.label}>End Date</Text> */}
+              <TouchableOpacity style={{ backgroundColor: appColors.primaryColor, paddingHorizontal: 16, paddingVertical: 8, borderRadius: 8 }} onPress={() => setShowEndPicker(true)}>
+                {showEndPicker ?
+                  <DateTimePicker
+                    style={styles.datePicker}
+                    mode="date"
+                    value={endDate}
+                    placeholder="Select End Date"
+                    format="YYYY-MM-DD"
+                    confirmBtnText="Confirm"
+                    cancelBtnText="Cancel"
+                    onChange={(event, date) => {
+                      setEndDate(date);
+                      setShowEndPicker(false)
+                    }}
+                  />
+                  :
+                  <Text style={{ color: appColors.white }}>{moment(endDate.toISOString().split('T')[0]).format(
+                    'DD-MMM-YY',
+                  )}</Text>}
+              </TouchableOpacity>
+            </View> :
+            <View style={{ flex: 1, alignItems: 'center' }}>
+              <DateTimePicker
+                style={styles.datePicker}
+                mode="date"
+                value={endDate}
+                placeholder="Select End Date"
+                format="YYYY-MM-DD"
+                textColor='#fff'
+                confirmBtnText="Confirm"
+                cancelBtnText="Cancel"
+                onChange={(event, date) => {
+                  setEndDate(date);
+                  setShowEndPicker(false)
+                }}
+              />
+            </View>}
         </View>
 
         {/* End Date Picker */}
@@ -207,7 +243,7 @@ const ApplyLeave = ({navigation}) => {
             <ActivityIndicator
               size="small"
               color={appColors.white}
-              style={{margin: 15}}
+              style={{ margin: 15 }}
             />
           )}
         </TouchableOpacity>
@@ -243,6 +279,8 @@ const styles = StyleSheet.create({
   datePicker: {
     width: '100%',
     marginVertical: 16,
+    backgroundColor: appColors.primaryColor,
+    borderRadius: 4,
   },
   input: {
     borderWidth: 1,

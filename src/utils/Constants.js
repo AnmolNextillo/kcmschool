@@ -20,6 +20,8 @@ export const annualCalender = 'student/annualCalender';
 export const appointments = 'student/appointments';
 export const testDetails = 'student/testDetails';
 export const ackTest = 'student/ackTest';
+export const myAttendanceApi = 'student/myAttendance';
+export const getAppVersionsApi = 'student/getAppVersions';
 
 
 export const handleShowMessage = (message,type) => {
