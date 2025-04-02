@@ -1,4 +1,5 @@
 import {
+  Alert,
   Image,
   SafeAreaView,
   ScrollView,
@@ -17,6 +18,7 @@ import { clearLoginData, hitLogin } from '../../redux/LoginSlice';
 import { handleShowMessage } from '../../utils/Constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getAppVersionresp } from '../../redux/GetAppVersionSlice';
+import DeviceInfo from 'react-native-device-info';
 
 const Login = ({ navigation }) => {
 
@@ -79,12 +81,13 @@ const Login = ({ navigation }) => {
   const checkForUpdates = async () => {
     try {
       const currentVersion = DeviceInfo.getVersion();
-      
+
       console.log("CurrentVersion ===> ", currentVersion)
       const latestVersion = Platform.OS === "android" ? responseAppVersion.data[0].androidVersion : responseAppVersion.data[0].iosVersion;
       const updateUrl = Platform.OS === "android" ? "https://play.google.com/store/apps/details?id=com.kcmschool" : "https://apps.apple.com/in/app/kcm-school/id6742997239";
 
-      if (currentVersion < 2.2) {
+      console.log("latestVersion ===> ", latestVersion)
+      if (currentVersion < latestVersion) {
         Alert.alert(
           "Update Available",
           `A new version (${latestVersion}) is available. Please update to continue.`,
