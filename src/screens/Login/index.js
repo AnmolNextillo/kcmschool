@@ -78,6 +78,7 @@ const Login = ({ navigation }) => {
     }
   }, [responseAppVersion])
 
+
   const checkForUpdates = async () => {
     try {
       const currentVersion = DeviceInfo.getVersion();
@@ -119,7 +120,7 @@ const Login = ({ navigation }) => {
 
         <View style={styles.formAreaStyle}>
           <Text style={styles.headerStyle}> Login </Text>
-          
+
           <Text style={styles.titleStyle}>Email</Text>
           <View
             style={styles.inputContainer}>

@@ -36,6 +36,7 @@ const GetAppVersionSlice = createSlice({
       state.data = null;
     },
   },
+
   extraReducers: (builder) => {
     builder
       .addCase(getAppVersionresp.pending, (state) => {
