@@ -119,6 +119,7 @@ const Login = ({ navigation }) => {
 
         <View style={styles.formAreaStyle}>
           <Text style={styles.headerStyle}> Login </Text>
+          
           <Text style={styles.titleStyle}>Email</Text>
           <View
             style={styles.inputContainer}>
