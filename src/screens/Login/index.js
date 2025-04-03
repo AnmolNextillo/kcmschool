@@ -1,4 +1,5 @@
 import {
+  Alert,
   Image,
   SafeAreaView,
   ScrollView,
@@ -8,6 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+<<<<<<< HEAD
 import React, {useEffect, useState} from 'react';
 import {getImage} from '../../utils/getImages';
 import {appColors} from '../../utils/color';
@@ -17,9 +19,24 @@ import {clearLoginData, hitLogin} from '../../redux/LoginSlice';
 import {handleShowMessage} from '../../utils/Constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LogoIcon from '../../assets/svg/LogoIcon';
+=======
+import React, { useEffect, useState } from 'react';
+import { getImage } from '../../utils/getImages';
+import { appColors } from '../../utils/color';
+import { ActivityIndicator } from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearLoginData, hitLogin } from '../../redux/LoginSlice';
+import { handleShowMessage } from '../../utils/Constants';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getAppVersionresp } from '../../redux/GetAppVersionSlice';
+import DeviceInfo from 'react-native-device-info';
+>>>>>>> e69eaff22011b2b1a7004900b1c5e16d2cffeae9
 
-const Login = ({navigation}) => {
-  const dispatch = useDispatch();
+const Login = ({ navigation }) => {
+
+  const dispatch = useDispatch()
+
+  const responseAppVersion = useSelector((state) => state.getAppVersionReducer.data)
   const loginResponse = useSelector(state => state.loginReducer.data);
 
   const [email, setEmail] = useState('manishseera12@gmail.com');
@@ -56,7 +73,11 @@ const Login = ({navigation}) => {
 
   const onLoginClick = async () => {
     if (email.length == 0) {
+<<<<<<< HEAD
       handleShowMessage('Please enter valid number', 'danger');
+=======
+      handleShowMessage("Please enter valid number", "danger");
+>>>>>>> e69eaff22011b2b1a7004900b1c5e16d2cffeae9
     } else {
       setIsLoading(true);
       const payload = {
@@ -88,10 +109,22 @@ const Login = ({navigation}) => {
     await AsyncStorage.setItem('mobileNumber', mobileNumber);
   };
 
+  useEffect(() => {
+    dispatch(getAppVersionresp())
+  }, [])
+
+  useEffect(() => {
+    console.log("responseAppVersion response ===>", responseAppVersion)
+    if (responseAppVersion != null && responseAppVersion.status === 1) {
+      checkForUpdates()
+    }
+  }, [responseAppVersion])
+
   const checkForUpdates = async () => {
     try {
       const currentVersion = DeviceInfo.getVersion();
 
+<<<<<<< HEAD
       console.log('CurrentVersion ===> ', currentVersion);
       const latestVersion =
         Platform.OS === 'android'
@@ -105,6 +138,16 @@ const Login = ({navigation}) => {
       if (currentVersion < latestVersion) {
         Alert.alert(
           'Update Available',
+=======
+      console.log("CurrentVersion ===> ", currentVersion)
+      const latestVersion = Platform.OS === "android" ? responseAppVersion.data[0].androidVersion : responseAppVersion.data[0].iosVersion;
+      const updateUrl = Platform.OS === "android" ? "https://play.google.com/store/apps/details?id=com.kcmschool" : "https://apps.apple.com/in/app/kcm-school/id6742997239";
+
+      console.log("latestVersion ===> ", latestVersion)
+      if (currentVersion < latestVersion) {
+        Alert.alert(
+          "Update Available",
+>>>>>>> e69eaff22011b2b1a7004900b1c5e16d2cffeae9
           `A new version (${latestVersion}) is available. Please update to continue.`,
           [
             {text: 'Update Now', onPress: () => Linking.openURL(updateUrl)},
@@ -118,6 +161,7 @@ const Login = ({navigation}) => {
   };
 
   return (
+<<<<<<< HEAD
     <SafeAreaView style={[styles.containerStyle, {padding: 16}]}>
       {!isSplash ? (
         <ScrollView style={styles.containerStyle}>
@@ -191,10 +235,17 @@ const Login = ({navigation}) => {
         </ScrollView>
       ) : (
         <View
+=======
+    <SafeAreaView style={[styles.containerStyle, { padding: 16 }]}>
+      <ScrollView style={styles.containerStyle}>
+        <Image
+          source={getImage('logo')}
+>>>>>>> e69eaff22011b2b1a7004900b1c5e16d2cffeae9
           style={{
             backgroundColor: appColors.white,
             alignItems: 'center',
             justifyContent: 'center',
+<<<<<<< HEAD
             flex: 1,
           }}>
           <Image
@@ -208,6 +259,63 @@ const Login = ({navigation}) => {
             }}
             resizeMode="contain"
           />
+=======
+            alignSelf: 'center',
+            height: 120,
+            width: 150,
+            marginTop: 48,
+          }}
+          resizeMode="contain"
+        />
+
+        <View style={styles.formAreaStyle}>
+          <Text style={styles.headerStyle}> Login </Text>
+          
+          <Text style={styles.titleStyle}>Email</Text>
+          <View
+            style={styles.inputContainer}>
+            <TextInput
+              placeholder="Email"
+              value={email}
+              onChangeText={setEmail}
+              style={{
+                color: appColors.black,
+              }}
+            />
+          </View>
+
+          <Text style={styles.titleStyle}>Password</Text>
+
+          <View style={styles.inputContainer}>
+            <TextInput
+              placeholder="Enter Password"
+              style={{
+                flex: 1,
+                color: appColors.black
+              }}
+              value={password}
+              onChangeText={setPassword}
+              placeholderTextColor="#A9A9A9" // appColors.grey alternative
+              secureTextEntry={!isPasswordVisible} // hides password when false
+            />
+
+          </View>
+
+          <TouchableOpacity
+            style={styles.loginButtonViewStyle}
+            onPress={() => onLoginClick()}>
+            {!isLoading ? (
+              <Text style={styles.loginButtonStyle} >Login</Text>
+            ) : (
+              <ActivityIndicator
+                size="small"
+                color={appColors.white}
+                style={{ margin: 15 }}
+              />
+            )}
+          </TouchableOpacity>
+
+>>>>>>> e69eaff22011b2b1a7004900b1c5e16d2cffeae9
           <Text
             style={{
               color: appColors.black,
@@ -229,7 +337,11 @@ const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
     backgroundColor: appColors.white,
+<<<<<<< HEAD
     padding: 16,
+=======
+    padding: 16
+>>>>>>> e69eaff22011b2b1a7004900b1c5e16d2cffeae9
   },
   headerStyle: {
     color: appColors.primaryColor,
@@ -254,7 +366,11 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginVertical: 10,
     height: 45,
+<<<<<<< HEAD
     paddingHorizontal: 8,
+=======
+    paddingHorizontal: 8
+>>>>>>> e69eaff22011b2b1a7004900b1c5e16d2cffeae9
   },
   textInputStyle: {
     borderRadius: 4,
@@ -273,13 +389,21 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     height: 45,
     alignItems: 'center',
+<<<<<<< HEAD
     justifyContent: 'center',
+=======
+    justifyContent: 'center'
+>>>>>>> e69eaff22011b2b1a7004900b1c5e16d2cffeae9
   },
   loginButtonStyle: {
     fontSize: 16,
     fontWeight: '700',
     color: appColors.white,
     textAlign: 'center',
+<<<<<<< HEAD
+=======
+
+>>>>>>> e69eaff22011b2b1a7004900b1c5e16d2cffeae9
   },
   titleStyle: {
     marginTop: 16,

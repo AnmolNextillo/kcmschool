@@ -18,7 +18,8 @@ import getTestsReducer from './GetTestsSlice';
 import getTestDetailReducer from './GetTestDetailSlice';
 import ackTestReducer from './AcknowladgeTestSlice';
 import myAttendanceReducer from './MyAttendanceSlice';
-
+import getAppVersionReducer from './GetAppVersionSlice';
+ 
 const store = configureStore({ 
   reducer: {
     loginReducer: loginReducer,
@@ -40,6 +41,7 @@ const store = configureStore({
     getTestDetailReducer: getTestDetailReducer,
     ackTestReducer: ackTestReducer,
     myAttendanceReducer: myAttendanceReducer,
+    getAppVersionReducer: getAppVersionReducer,
   },
 });
 
