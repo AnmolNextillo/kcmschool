@@ -41,7 +41,7 @@ const HomeWorkList = ({navigation}) => {
             onPress={() => navigation.goBack()}>
             Back
           </Text>
-          <Text style={styles.headerText}>Home Work</Text>
+          <Text style={styles.headerText}>Homework</Text>
         </View>
         <ScrollView style={{padding: 16}}>
           <View style={styles.container}>

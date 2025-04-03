@@ -29,7 +29,7 @@ const HomeWork = ({navigation,route}) => {
             onPress={() => navigation.goBack()}>
             Back
           </Text>
-          <Text style={styles.headerText}>HomeWork</Text>
+          <Text style={styles.headerText}>Homework Details</Text>
         </View>
         <ScrollView style={{padding: 16}}>
           <View style={{backgroundColor:appColors.white,padding:16,borderRadius:16}}>

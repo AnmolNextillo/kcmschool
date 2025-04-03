@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     userName: {
       fontSize: 18,
       marginBottom: 6,
-      color: appColors.white,
+      color: appColors.primaryColor,
       fontWeight: '500',
     },
     admissionText: {

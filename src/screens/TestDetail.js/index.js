@@ -88,7 +88,7 @@ const TestDetail = ({navigation, route}) => {
             </TouchableOpacity>
           </View>
           <TouchableOpacity style={styles.acknowladgeStyle} onPress={()=>testData!=null&&testData.isReviewedByParent==0?onAckClick():handleShowMessage("Test already acknowladged.","success")}>
-            <Text style={{color:appColors.white}}>{testData!=null&&testData.isReviewedByParent==0?"Acknowladge":"Acknowladged"}</Text>
+            <Text style={{color:appColors.white}}>{testData!=null&&testData.isReviewedByParent==0?"Acknowledge":"Acknowledged"}</Text>
           </TouchableOpacity>
         </View>
       </View>

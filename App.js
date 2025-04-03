@@ -39,29 +39,11 @@ import './src/component/firebase.js'
 import BookAppointment from './src/screens/BookAppointment/index.js';
 import Attendence from './src/screens/Attendence/index.js';
 import TestDetail from './src/screens/TestDetail.js/index.js';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createNativeStackNavigator();
 
 
-function App() {
-
-  // const getFcmToken = async () => {
-  //   try {
-  //     const newFcmToken = await messaging().getToken();
-  //     console.log(newFcmToken);
-  //     return newFcmToken;
-  //   } catch (error) {
-  //     console.error(error);
-  //     return null;
-  //   }
-  // };
-
-  // useEffect(()=>{  
-  //   getFcmToken()
-  // },[])
-
-  
+function App() {  
 
   return (
     <Provider store={store}>

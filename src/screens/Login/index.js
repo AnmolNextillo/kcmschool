@@ -32,9 +32,10 @@ const Login = ({navigation}) => {
   const checkLogin = async () => {
     const token = await AsyncStorage.getItem('token');
     setTimeout(() => {
-      checkLogin();
+      // checkLogin();
 
       if (token != null) {
+        console.log("hhh")
         setIsSplash(false);
         navigation.reset({
           index: 0,
@@ -44,6 +45,8 @@ const Login = ({navigation}) => {
         setIsSplash(false);
       }
     }, 1500);
+
+    return () => clearTimeout(timeout); 
   };
 
   useEffect(() => {

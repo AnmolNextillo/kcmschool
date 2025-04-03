@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {appColors} from '../../utils/color';
 import HomeProfileIcon from '../../assets/svg/HomeProfileIcon';
 import {getImage} from '../../utils/getImages';
@@ -26,27 +26,27 @@ import LeaveDetailIcon from '../../assets/svg/LeaveDetailIcon';
 import AnnualCalenderIcon from '../../assets/svg/AnnualCalenderIcon';
 import PaymentHistoryIcon from '../../assets/svg/PaymentHistoryIcon';
 import OnlinePaymentIcon from '../../assets/svg/OnlinePaymentIcon';
-import { hitProfile } from '../../redux/GetProfileSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import {hitProfile} from '../../redux/GetProfileSlice';
+import {useDispatch, useSelector} from 'react-redux';
 
 const Home = () => {
   const navigation = useNavigation();
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const responseProfile = useSelector((state) => state.getProfileReducer.data) 
-  
-  const [profileData,setProfileData] = useState(null)
+  const responseProfile = useSelector(state => state.getProfileReducer.data);
 
-    useEffect(()=>{
-      dispatch(hitProfile())
-    },[])
+  const [profileData, setProfileData] = useState(null);
 
-      useEffect(()=>{
-        if(responseProfile!=null && responseProfile.status == 1){
-          setProfileData(responseProfile.data)
-        }
-      },[responseProfile])
+  useEffect(() => {
+    dispatch(hitProfile());
+  }, []);
+
+  useEffect(() => {
+    if (responseProfile != null && responseProfile.status == 1) {
+      setProfileData(responseProfile.data);
+    }
+  }, [responseProfile]);
 
   return (
     <SafeAreaView style={styles.containerStyle}>
@@ -59,15 +59,21 @@ const Home = () => {
             <View style={styles.profileImage}>
               <HomeProfileIcon style={{fill: appColors.white}} />
             </View>
-            <Text style={styles.userName}>{profileData!=null?profileData.name:""}</Text>
-            <Text style={styles.admissionText}>Class :{profileData!=null?profileData.classId.name:""}</Text>
+            <Text style={styles.userName}>
+              {profileData != null ? profileData.name : ''}
+            </Text>
+            <Text style={styles.admissionText}>
+              Class :{profileData != null ? profileData.classId.name : ''}
+            </Text>
             {/* <Text style={styles.admissionText}>Parent</Text> */}
           </View>
         </View>
         <View style={styles.CardTopStyle}>
           <Text style={styles.AcademicText}>Academics</Text>
           <View style={styles.CardStyle}>
-            <TouchableOpacity style={styles.cardBox}  onPress={() => navigation.navigate('Attendence')}>
+            <TouchableOpacity
+              style={styles.cardBox}
+              onPress={() => navigation.navigate('Attendence')}>
               <View style={styles.imageBoxStyle}>
                 <AttendenceIcon />
               </View>
@@ -97,7 +103,9 @@ const Home = () => {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.cardBox}
-              onPress={() => navigation.navigate('TimeTable',{title:"Time Table",from:0})}>
+              onPress={() =>
+                navigation.navigate('TimeTable', {title: 'Time Table', from: 0})
+              }>
               <TimeTableIcon />
               <Text style={styles.cardNameStyle}>Time Table</Text>
             </TouchableOpacity>
@@ -121,7 +129,7 @@ const Home = () => {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.cardBox}
-              onPress={() => navigation.navigate('EventDetail')}>
+              onPress={() => navigation.navigate('EventDetail',{from:0})}>
               <EventIcon />
               <Text style={styles.cardNameStyle}>Events</Text>
             </TouchableOpacity>
@@ -149,7 +157,14 @@ const Home = () => {
               <LeaveDetailIcon />
               <Text style={styles.cardNameStyle}>Leave Details</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.cardBox} onPress={() => navigation.navigate('TimeTable',{title:"Annual Calendar",from:1})}>
+            <TouchableOpacity
+              style={styles.cardBox}
+              onPress={() =>
+                navigation.navigate('TimeTable', {
+                  title: 'Annual Calendar',
+                  from: 1,
+                })
+              }>
               <AnnualCalenderIcon />
               <Text style={styles.cardNameStyle}>Annual Calendar</Text>
             </TouchableOpacity>
@@ -259,7 +274,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     gap: 12,
     width: '100%',
-    marginBottom:40
+    marginBottom: 40,
   },
   cardBoxLeft: {
     alignItems: 'center',

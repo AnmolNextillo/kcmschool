@@ -3,8 +3,7 @@ import React from 'react';
 import {useNavigation} from '@react-navigation/core';
 import {appColors} from '../../utils/color';
 
-const Massage = () => {
-  const navigation = useNavigation();
+const Massage = ({navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1}}>

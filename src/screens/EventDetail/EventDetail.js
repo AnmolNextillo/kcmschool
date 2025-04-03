@@ -14,7 +14,9 @@ import { hitEvent } from '../../redux/GetEventSlice';
 import { formatDate } from '../../utils/Constants';
 import { Item } from 'react-native-paper/lib/typescript/components/Drawer/Drawer';
 
-const EventDetail = () => {
+const EventDetail = ({route}) => {
+
+  const {from} = route.params
   const navigation = useNavigation();
   const dispatch = useDispatch()
 
@@ -27,6 +29,7 @@ const EventDetail = () => {
   },[])
 
   useEffect(()=>{
+    console.log("responseEvent ===> ",responseEvent)
     if(responseEvent!=null && responseEvent.status==1){
       setEventData(responseEvent.data)
     }
@@ -46,7 +49,7 @@ const EventDetail = () => {
             onPress={() => navigation.goBack()}>
             Back
           </Text>
-          <Text style={styles.headerText}>Message</Text>
+          <Text style={styles.headerText}>{from==0?"Event":"Message"}</Text>
         </View>
         <ScrollView style={{padding: 16}}>
           {eventData!=null && eventData.map((item)=>
@@ -68,6 +71,7 @@ const EventDetail = () => {
                 ellipsizeMode="tail">
                   {item.description}
               </Text>
+              <Text style={{color:appColors.primaryColor,marginTop:4}}>{item.date}</Text>
             </TouchableOpacity>
           </View>
           )}

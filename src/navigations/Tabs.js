@@ -15,7 +15,7 @@ import EventDetail from '../screens/EventDetail/EventDetail';
 
 const Tab = createBottomTabNavigator();
 
-const Tabs = () => {   
+const Tabs = () => {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -40,7 +40,9 @@ const Tabs = () => {
                 alignItems: 'center',
                 width: 50,
               }}>
-              <HomeIcon stroke={focused ? appColors.primaryColor : appColors.black} />
+              <HomeIcon
+                stroke={focused ? appColors.primaryColor : appColors.black}
+              />
               <Text
                 style={{
                   color: focused ? appColors.primaryColor : appColors.black,
@@ -54,7 +56,10 @@ const Tabs = () => {
       />
       <Tab.Screen
         name="Massage"
-        component={EventDetail}
+        component={({route, navigation}) => (
+          <EventDetail route={route} navigation={navigation} />
+        )}
+        initialParams={{from: 1}} // Pass your initial params here
         options={{
           tabBarIcon: ({focused}) => (
             <View
@@ -63,16 +68,6 @@ const Tabs = () => {
                 alignItems: 'center',
                 width: 60,
               }}>
-              {/* <Image
-                source={getImage('booking')}
-                style={{
-                  justifyContent: 'center',
-                  alignSelf: 'center',
-                  height: 24,
-                  width: 24,
-                }}
-                resizeMode="contain"
-              /> */}
               <MassageIcon
                 stroke={focused ? appColors.primaryColor : appColors.black}
               />

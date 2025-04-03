@@ -15,8 +15,7 @@ import EventIcon from '../../assets/svg/EventIcon';
 import HomeworkIcon from '../../assets/svg/HomeworkIcon';
 import TestsIcon from '../../assets/svg/TestsIcons';
 
-const Notification = () => {
-  const navigation = useNavigation();
+const Notification = ({navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -47,12 +46,12 @@ const Notification = () => {
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.cardBox}
-                onPress={() => navigation.navigate('')}>
+                onPress={() => navigation.navigate('HomeWorkList')}>
                 <HomeworkIcon/>
                 <Text
                   style={styles.cardNameStyle}
-                  onPress={() => navigation.navigate('HomeWork')}>
-                  Home Work
+                >
+                  Homework
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
@@ -68,7 +67,7 @@ const Notification = () => {
             </View>
 
             <View style={styles.CardStyleLeft}>
-              <TouchableOpacity style={styles.cardBoxLeft}>
+              <TouchableOpacity style={styles.cardBoxLeft} onPress={() => navigation.navigate('Test')}>
                 <TestsIcon/>
                 <Text style={styles.cardNameStyle}>Tests</Text>
               </TouchableOpacity>
