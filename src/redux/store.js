@@ -19,7 +19,7 @@ import getTestDetailReducer from './GetTestDetailSlice';
 import ackTestReducer from './AcknowladgeTestSlice';
 import myAttendanceReducer from './MyAttendanceSlice';
 
-const store = configureStore({
+const store = configureStore({ 
   reducer: {
     loginReducer: loginReducer,
     logoutReducer: logoutReducer,
