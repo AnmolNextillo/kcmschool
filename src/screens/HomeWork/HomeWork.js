@@ -4,6 +4,7 @@ import {appColors} from '../../utils/color';
 import { useDispatch } from 'react-redux';
 import { hitHomeWork } from '../../redux/HomeWorkSlice';
 import moment from 'moment';
+import { ImageBaseUrl } from '../../utils/Constants';
 
 const HomeWork = ({navigation,route}) => {
 
@@ -42,8 +43,8 @@ const HomeWork = ({navigation,route}) => {
             
           <Text style={styles.subjectText}>{item.description}</Text>
           <Text style={styles.subjectText}><Text style={{fontWeight: '500'}}>Date : </Text>{moment(item.date).format('MMM D, YYYY')}</Text>
-          <Text style={styles.LinkText}>Attachment Link</Text>
-          <Text style={[styles.subjectText,{color:appColors.blue}]} onPress={()=>openLink("https://school-project-varun.s3.ap-south-1.amazonaws.com/"+item.media)}>https://school-project-varun.s3.ap-south-1.amazonaws.com/+{item.media}</Text>
+           {item.media!=''&&<Text style={styles.LinkText}>Attachment Link</Text>}
+          {item.media!=''&&<Text style={[styles.subjectText,{color:appColors.blue}]} onPress={()=>openLink(ImageBaseUrl+item.media)}>{ImageBaseUrl+item.media}</Text>}
           <Text style={styles.LinkText}>Link</Text>
           <Text style={styles.subjectText}>---</Text>
           </View>

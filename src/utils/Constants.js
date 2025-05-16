@@ -2,6 +2,7 @@ import { showMessage } from "react-native-flash-message";
 
 //Api BaseUrl
 export const ApiBaseUrl = 'https://api.kcmschool.co.in/v1/';
+export const ImageBaseUrl = 'https://school-project-varun.s3.ap-south-1.amazonaws.com/';
 
 //Api Names
 export const loginApi = 'student/login';
@@ -22,6 +23,7 @@ export const testDetails = 'student/testDetails';
 export const ackTest = 'student/ackTest';
 export const myAttendanceApi = 'student/myAttendance';
 export const getAppVersionsApi = 'student/getAppVersions';
+export const getNotifications = 'student/getNotifications';
 
 
 export const handleShowMessage = (message,type) => {

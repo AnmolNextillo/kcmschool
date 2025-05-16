@@ -91,7 +91,7 @@ const ApplyLeave = ({ navigation }) => {
             borderColor: appColors.black,
             borderWidth: 1,
             borderRadius: 8,
-            padding: 16,
+            padding: 8,
             flexDirection: 'row',
             alignItems: 'center',
           }}>
@@ -283,6 +283,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   input: {
+    textAlignVertical: 'top',
     borderWidth: 1,
     padding: 10,
     borderRadius: 5,

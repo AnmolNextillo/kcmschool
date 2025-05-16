@@ -1,5 +1,7 @@
 import {
+  Alert,
   Image,
+  Linking,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -8,22 +10,28 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
-import {getImage} from '../../utils/getImages';
-import {appColors} from '../../utils/color';
-import {ActivityIndicator} from 'react-native-paper';
-import {useDispatch, useSelector} from 'react-redux';
-import {clearLoginData, hitLogin} from '../../redux/LoginSlice';
-import {handleShowMessage} from '../../utils/Constants';
+import React, { useEffect, useState } from 'react';
+import { getImage } from '../../utils/getImages';
+import { appColors } from '../../utils/color';
+import { ActivityIndicator } from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearLoginData, hitLogin } from '../../redux/LoginSlice';
+import { handleShowMessage } from '../../utils/Constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import LogoIcon from '../../assets/svg/LogoIcon';
+import { getAppVersionresp } from '../../redux/GetAppVersionSlice';
+import DeviceInfo from 'react-native-device-info';
 
-const Login = ({navigation}) => {
-  const dispatch = useDispatch();
+const Login = ({ navigation }) => {
+
+  const dispatch = useDispatch()
+
+  const responseAppVersion = useSelector((state) => state.getAppVersionReducer.data)
   const loginResponse = useSelector(state => state.loginReducer.data);
 
   const [email, setEmail] = useState('manishseera12@gmail.com');
-  const [password, setPassword] = useState('123456');
+  const [password, setPassword] = useState('manish@123');
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -55,6 +63,7 @@ const Login = ({navigation}) => {
   }, []);
 
   const onLoginClick = async () => {
+   const fcmToken = await AsyncStorage.getItem("fcmToken")
     if (email.length == 0) {
       handleShowMessage('Please enter valid number', 'danger');
     } else {
@@ -62,6 +71,7 @@ const Login = ({navigation}) => {
       const payload = {
         email: email,
         password: password,
+        fcmToken:fcmToken
       };
 
       console.log('Payload ===> ', payload);
@@ -88,23 +98,29 @@ const Login = ({navigation}) => {
     await AsyncStorage.setItem('mobileNumber', mobileNumber);
   };
 
+  useEffect(() => {
+    dispatch(getAppVersionresp())
+  }, [])
+
+  useEffect(() => {
+    console.log("responseAppVersion response ===>", responseAppVersion)
+    if (responseAppVersion != null && responseAppVersion.status === 1) {
+      checkForUpdates()
+    }
+  }, [responseAppVersion])
+
   const checkForUpdates = async () => {
     try {
       const currentVersion = DeviceInfo.getVersion();
 
-      console.log('CurrentVersion ===> ', currentVersion);
-      const latestVersion =
-        Platform.OS === 'android'
-          ? responseAppVersion.data[0].androidVersion
-          : responseAppVersion.data[0].iosVersion;
-      const updateUrl =
-        Platform.OS === 'android'
-          ? 'https://play.google.com/store/apps/details?id=com.kiorapp'
-          : 'https://apps.apple.com/in/app/kior/id6736437490';
+      console.log("CurrentVersion ===> ", currentVersion)
+      const latestVersion = Platform.OS === "android" ? responseAppVersion.data[0].androidVersion : responseAppVersion.data[0].iosVersion;
+      const updateUrl = Platform.OS === "android" ? "https://play.google.com/store/apps/details?id=com.kcmschool" : "https://apps.apple.com/in/app/kcm-school/id6742997239";
 
+      console.log("latestVersion ===> ", latestVersion)
       if (currentVersion < latestVersion) {
         Alert.alert(
-          'Update Available',
+          "Update Available",
           `A new version (${latestVersion}) is available. Please update to continue.`,
           [
             {text: 'Update Now', onPress: () => Linking.openURL(updateUrl)},
@@ -229,7 +245,7 @@ const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
     backgroundColor: appColors.white,
-    padding: 16,
+    // padding: 16,
   },
   headerStyle: {
     color: appColors.primaryColor,
@@ -255,6 +271,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     height: 45,
     paddingHorizontal: 8,
+    width:"100%"
   },
   textInputStyle: {
     borderRadius: 4,
@@ -273,7 +290,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     height: 45,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   loginButtonStyle: {
     fontSize: 16,

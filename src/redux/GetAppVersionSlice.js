@@ -4,7 +4,7 @@ import axios from "axios";
 import { ApiBaseUrl, getAppVersionsApi } from "../utils/Constants";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const getAppVersion = createAsyncThunk("getAppVersion", async () => {
+export const getAppVersionresp = createAsyncThunk("getAppVersionresp", async () => {
   try {
 
     const token = await AsyncStorage.getItem('token');
@@ -25,7 +25,7 @@ export const getAppVersion = createAsyncThunk("getAppVersion", async () => {
 });
 
 const GetAppVersionSlice = createSlice({
-  name: "ggetAppVersionReducer",
+  name: "getAppVersionReducer",
 
   initialState: {
     isLoading: false,
@@ -38,14 +38,14 @@ const GetAppVersionSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getAppVersion.pending, (state) => {
+      .addCase(getAppVersionresp.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getAppVersion.fulfilled, (state, action) => {
+      .addCase(getAppVersionresp.fulfilled, (state, action) => {
         state.isLoading = false;
         state.data = action.payload;
       })
-      .addCase(getAppVersion.rejected, (state) => {
+      .addCase(getAppVersionresp.rejected, (state) => {
         state.isError = false;
       });
   },

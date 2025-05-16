@@ -52,7 +52,7 @@ const Attendence = () => {
                     onPress={() => navigation.goBack()}>
                     Back
                 </Text>
-                <Text style={styles.headerText}>Apply Leave</Text>
+                <Text style={styles.headerText}>Attendance</Text>
             </View>
             <ScrollView>
                 <Text style={{ fontWeight: '600', color: app.black, fontSize: 18, padding: 16, textAlign: 'center' }}>

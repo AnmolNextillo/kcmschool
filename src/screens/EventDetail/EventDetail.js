@@ -12,7 +12,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { hitEvent } from '../../redux/GetEventSlice';
 import { formatDate } from '../../utils/Constants';
-import { Item } from 'react-native-paper/lib/typescript/components/Drawer/Drawer';
 
 const EventDetail = ({route}) => {
 
@@ -23,6 +22,7 @@ const EventDetail = ({route}) => {
   const responseEvent = useSelector((state)=>state.getEventReducer.data)
 
   const [eventData,setEventData] = useState(null)
+  console.log("From ===> ",from)
 
   useEffect(()=>{
     dispatch(hitEvent())

@@ -11,7 +11,7 @@ import {appColors} from '../../utils/color';
 import { useDispatch, useSelector } from 'react-redux';
 import { hitTestDetail } from '../../redux/GetTestDetailSlice';
 import { clearAckTest, hitAckTest } from '../../redux/AcknowladgeTestSlice';
-import { handleShowMessage } from '../../utils/Constants';
+import { handleShowMessage, ImageBaseUrl } from '../../utils/Constants';
 
 const TestDetail = ({navigation, route}) => {
   const {data} = route.params;
@@ -39,7 +39,7 @@ const TestDetail = ({navigation, route}) => {
 
     const openLink = (fileUrl) => {
       console.log(fileUrl)
-      Linking.openURL("https://school-project-varun.s3.ap-south-1.amazonaws.com/"+fileUrl).catch((err) => console.error("Failed to open URL:", err));
+      Linking.openURL(fileUrl).catch((err) => console.error("Failed to open URL:", err));
     };
     
     const onAckClick = () =>{
@@ -79,14 +79,14 @@ const TestDetail = ({navigation, route}) => {
           <Text style={{fontWeight: '600'}}>Date: {testData!=null&&testData.testId.date}</Text>
           <Text style={{fontWeight: '400',marginTop:8}}>Total Marks: <Text style={{fontWeight:"600"}}>{testData!=null&&testData.totalMarks}</Text></Text>
           <Text style={{fontWeight: '400',marginTop:8}}>Obtain Marks: <Text style={{fontWeight:"600"}}>{testData!=null&&testData.obtainedMarks}</Text></Text>
-          <View style={{fontWeight: '400',marginTop:8, flexDirection: 'row',marginRight:16}}>
+          {testData!=null&&<View style={{fontWeight: '400',marginTop:8, flexDirection: 'row',marginRight:16}}>
             <Text>Link:</Text>
-            <TouchableOpacity style={{marginRight:16}} onPress={()=>openLink(testData!=null&&testData.testId.media)}>
+            <TouchableOpacity style={{marginRight:16}} onPress={()=>openLink(ImageBaseUrl+testData.testId.media)}>
             <Text style={{color: appColors.blue,marginLeft:8}}>
-              { testData!=null&&testData.testId.media}
+              { ImageBaseUrl+testData.testId.media}
             </Text>
             </TouchableOpacity>
-          </View>
+          </View>}
           <TouchableOpacity style={styles.acknowladgeStyle} onPress={()=>testData!=null&&testData.isReviewedByParent==0?onAckClick():handleShowMessage("Test already acknowladged.","success")}>
             <Text style={{color:appColors.white}}>{testData!=null&&testData.isReviewedByParent==0?"Acknowledge":"Acknowledged"}</Text>
           </TouchableOpacity>
