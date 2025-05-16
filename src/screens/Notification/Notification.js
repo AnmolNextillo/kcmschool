@@ -35,18 +35,18 @@ const Notification = ({navigation}) => {
           <Text style={styles.headerText}>Notification</Text>
         </View>
         <ScrollView style={{padding: 16}}>
-          <View style={styles.CardTopStyle}>
+          <View>
             {/* <Text style={styles.AcademicText}>Academics</Text> */}
             <View style={styles.CardStyle}>
               <TouchableOpacity
                 style={styles.cardBox}
-                onPress={() => navigation.navigate('EventDetail')}>
+                onPress={() => navigation.navigate('NotificationList',{from:2})}>
                 <EventIcon/>
                 <Text style={styles.cardNameStyle}>Events</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.cardBox}
-                onPress={() => navigation.navigate('HomeWorkList')}>
+                 onPress={() => navigation.navigate('NotificationList',{from:1})}>
                 <HomeworkIcon/>
                 <Text
                   style={styles.cardNameStyle}
@@ -56,20 +56,20 @@ const Notification = ({navigation}) => {
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.cardBox}
-                onPress={() => navigation.navigate('Gallery')}>
+                onPress={() => navigation.navigate('NotificationList',{from:4})}>
                 <Image
                   source={getImage('booking')}
                   style={styles.imageBoxStyle}
                   resizeMode="contain"
-                />{' '}
+                />
                 <Text style={styles.cardNameStyle}>Gallery</Text>
               </TouchableOpacity>
             </View>
 
             <View style={styles.CardStyleLeft}>
-              <TouchableOpacity style={styles.cardBoxLeft} onPress={() => navigation.navigate('Test')}>
+              <TouchableOpacity style={styles.cardBoxLeft} onPress={() =>navigation.navigate('NotificationList',{from:3})}>
                 <TestsIcon/>
-                <Text style={styles.cardNameStyle}>Tests</Text>
+                <Text style={styles.cardNameStyle}>Announcement</Text>
               </TouchableOpacity>
             </View>
           </View>

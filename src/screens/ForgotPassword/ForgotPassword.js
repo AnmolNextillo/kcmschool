@@ -43,7 +43,6 @@ const ForgotPassword = ({navigation}) => {
             ]}>
             <TextInput
               placeholder="Email"
-              maxLength={10}
               style={{width: '100%'}}
             />
           </View>
@@ -63,7 +62,7 @@ const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
     backgroundColor: appColors.white,
-    padding:16
+    // padding:16
   },
   headerStyle: {
     color: appColors.primaryColor,
@@ -84,7 +83,8 @@ const styles = StyleSheet.create({
     borderColor: appColors.grey,
     borderRadius: 8,
     marginVertical: 10,
-    padding:16
+    height: 45,
+    paddingHorizontal: 8,
   },
   textInputStyle: {
     borderRadius: 4,

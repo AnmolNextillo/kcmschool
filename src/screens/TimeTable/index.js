@@ -1,4 +1,11 @@
-import {Dimensions, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {
+  Dimensions,
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {appColors} from '../../utils/color';
 import {useDispatch, useSelector} from 'react-redux';
@@ -8,6 +15,7 @@ import {
   clearAnnualCalender,
   hitAnnualCalender,
 } from '../../redux/GetAnnualCalender';
+import { ImageBaseUrl } from '../../utils/Constants';
 
 const TimeTable = ({navigation, route}) => {
   const {title, from} = route.params;
@@ -63,20 +71,51 @@ const TimeTable = ({navigation, route}) => {
           <Text style={styles.headerText}>{title}</Text>
         </View>
 
-        {!isLoading?<View style={{flex:1}}>
-          {timeTable != null ? (
-            <WebView
-              style={{flex: 1}}
-              source={{
-                uri:
-                  'https://docs.google.com/gview?embedded=true&url=https://school-project-varun.s3.ap-south-1.amazonaws.com/' +
-                  timeTable.media,
-              }}
-            />
-          ):  <View style={{flex:1,justifyContent:'center',alignItems:'center'}}><Text style={{color:appColors.black,fontSize:18}}>Currently not updated</Text></View>}
-        </View>:
-       <View style={{flex:1,justifyContent:'center',alignItems:'center'}}><Text style={{color:appColors.black,fontSize:18}}>Loading...</Text></View>
-        }
+        {!isLoading ? (
+          <View style={{flex: 1}}>
+            {timeTable != null ? (
+              from==0?<Image
+                source={{uri:ImageBaseUrl+timeTable.media}}
+                style={{flex: 1}}
+                resizeMode="contain"
+              />:
+               <WebView
+                style={{flex: 1}}
+                source={{
+                  uri:
+                    'https://docs.google.com/gview?embedded=true&url=https://school-project-varun.s3.ap-south-1.amazonaws.com/' +
+                    timeTable.media,
+                }}
+              />
+            ) : (
+              // <WebView
+              //   style={{flex: 1}}
+              //   source={{
+              //     uri:
+              //       'https://docs.google.com/gview?embedded=true&url=https://school-project-varun.s3.ap-south-1.amazonaws.com/' +
+              //       timeTable.media,
+              //   }}
+              // />
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Text style={{color: appColors.black, fontSize: 18}}>
+                  Currently not updated
+                </Text>
+              </View>
+            )}
+          </View>
+        ) : (
+          <View
+            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <Text style={{color: appColors.black, fontSize: 18}}>
+              Loading...
+            </Text>
+          </View>
+        )}
       </View>
     </SafeAreaView>
   );

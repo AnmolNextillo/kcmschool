@@ -79,7 +79,7 @@ const BookAppointment = ({ navigation }) => {
 
       <View style={styles.container}>
         {/* Leave Type Dropdown */}
-        <View style={{ borderColor: appColors.black, borderWidth: 1, borderRadius: 8, padding: 16, flexDirection: 'row', alignItems: 'center' }}>
+        <View style={{ borderColor: appColors.black, borderWidth: 1, borderRadius: 8, padding: 8, flexDirection: 'row', alignItems: 'center' }}>
           <Text style={{ flex: 1, color: appColors.black }} onPress={() => setMenuVisible(true)}>{leaveType}</Text>
           <TouchableOpacity style={{ transform: [{ rotate: '90deg' }] }} onPress={() => setMenuVisible(true)}>
             <ArrowRight />
@@ -191,6 +191,7 @@ const styles = StyleSheet.create({
     marginVertical: 16,
   },
   input: {
+    textAlignVertical: 'top',
     borderWidth: 1,
     padding: 10,
     borderRadius: 5,

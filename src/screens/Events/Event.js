@@ -1,14 +1,11 @@
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {useNavigation} from '@react-navigation/core';
 import {appColors} from '../../utils/color';
 
-const Event = ({route}) => {
-  const navigation = useNavigation();
+const Event = ({navigation, route}) => {
+  const {item} = route.params;
 
-  const {item} = route.params
-
-  console.log("Item ====> ",item)
+  console.log('Item ====> ', item);
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -28,10 +25,16 @@ const Event = ({route}) => {
           <Text style={styles.headerText}>Event</Text>
         </View>
         <View style={{padding: 16}}>
-            <Text style={{fontSize:15,marginBottom:4,fontWeight:'500'}}>{item.title}</Text>
-            <Text style={{fontSize:14,marginBottom:20}}>{item.description}</Text>
-            <Text style={{fontSize:15,fontWeight:'500',marginBottom:4}}>Event Date</Text>
-            <Text style={{fontSize:14,}}>{}</Text>
+          <Text style={{fontSize: 15, marginBottom: 4, fontWeight: '500'}}>
+            {item.title}
+          </Text>
+          <Text style={{fontSize: 14, marginBottom: 20}}>
+            {item.description}
+          </Text>
+          <Text style={{fontSize: 15, fontWeight: '500', marginBottom: 4}}>
+            Event Date
+          </Text>
+          <Text style={{fontSize: 14}}>{}</Text>
         </View>
       </View>
     </SafeAreaView>
@@ -41,12 +44,12 @@ const Event = ({route}) => {
 export default Event;
 
 const styles = StyleSheet.create({
-    headerText: {
-        color: appColors.black,
-        fontWeight: '500',
-        marginRight: 16,
-        textAlign: 'center',
-        flex: 1,
-        fontSize: 16,
-      },
+  headerText: {
+    color: appColors.black,
+    fontWeight: '500',
+    marginRight: 16,
+    textAlign: 'center',
+    flex: 1,
+    fontSize: 16,
+  },
 });

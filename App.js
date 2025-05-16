@@ -39,14 +39,18 @@ import './src/component/firebase.js'
 import BookAppointment from './src/screens/BookAppointment/index.js';
 import Attendence from './src/screens/Attendence/index.js';
 import TestDetail from './src/screens/TestDetail.js/index.js';
+import PushNotificationManager from './src/service/PushNotificationManager.js';
+import NotificationList from './src/screens/Notification/NotificationList.js';
 
 const Stack = createNativeStackNavigator();
 
 
-function App() {  
+const  App = () => {  
+
 
   return (
     <Provider store={store}>
+      <PushNotificationManager />
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='Login'>
           <Stack.Screen name="Login" component={Login} options={{ title: 'Login' }} />
@@ -72,6 +76,7 @@ function App() {
           <Stack.Screen name="HomeWorkList" component={HomeWorkList} options={{ title: 'HomeWorkList' }} /> 
           <Stack.Screen name="BookAppointment" component={BookAppointment} options={{ title: 'BookAppointment' }} /> 
           <Stack.Screen name="Attendence" component={Attendence} options={{ title: 'Attendence' }} /> 
+          <Stack.Screen name="NotificationList" component={NotificationList} options={{ title: 'NotificationList' }} /> 
         </Stack.Navigator>
     </NavigationContainer>
     <FlashMessage position="bottom" />
@@ -79,7 +84,7 @@ function App() {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({  
   constainerStyle:{
     flex:1,
     backgroundColor:'black'
